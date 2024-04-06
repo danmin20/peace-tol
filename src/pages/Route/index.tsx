@@ -41,7 +41,7 @@ export const Route = () => {
 
   const handleBack = () => {
     if (stage === 1) {
-      navigate('/level-select', {
+      navigate('/', {
         state: { level: location.state?.level ?? undefined }
       })
       return

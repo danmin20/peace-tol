@@ -11,12 +11,12 @@ import {
   checkIcon,
   wrapperButton
 } from './style'
-import { Button } from '../../_common/components/Button'
-import { Header } from '../../_common/components/Header'
-import { Splash } from '../../_common/components/Splash'
-import { Check, Gun1, Gun2, Gun3 } from '../../assets'
-import { getUser } from '../../_common/utils/user'
 import { postUser } from '../../_common/api/user.api'
+import { Button } from '../../_common/components/Button'
+// import { Header } from '../../_common/components/Header'
+import { Splash } from '../../_common/components/Splash'
+import { getUser, setUser } from '../../_common/utils/user'
+import { Check, Gun1, Gun2, Gun3 } from '../../assets'
 
 type LevelType = {
   level: number
@@ -51,7 +51,7 @@ export const LevelSelect = () => {
   const handleSetUser = async () => {
     if (!getUser()) {
       const data = await postUser()
-      localStorage.setItem('user', JSON.stringify(data))
+      setUser(data.uuid)
     }
   }
 
@@ -62,7 +62,7 @@ export const LevelSelect = () => {
   return (
     <>
       <Splash />
-      <Header handleBack={() => navigate('/main')} />
+      {/* <Header handleBack={() => navigate('/')} /> */}
       <div css={LayoutStyle}>
         <div css={TextGroup}>
           <div>

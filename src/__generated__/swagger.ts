@@ -9,6 +9,11 @@
  * ---------------------------------------------------------------
  */
 
+export interface CreateUserDto {
+  /** @example "0c6962ee-3658-4201-b74a-de81979f49ed" */
+  uuid: string
+}
+
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios'
 import axios from 'axios'
 
@@ -189,9 +194,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/users
      */
     userControllerCreateUserUuid: (params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<CreateUserDto, any>({
         path: `/api/v1/users`,
         method: 'POST',
+        format: 'json',
         ...params
       })
   }
