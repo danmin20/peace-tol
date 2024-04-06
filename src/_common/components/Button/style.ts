@@ -21,3 +21,8 @@ export const FullWidthButtonStyle = css(ButtonStyle, {
   fontWeight: 700,
   fontSize: '18px'
 })
+
+export const loadingLottieStyle = css({
+  width: '100%',
+  height: '100%'
+})
