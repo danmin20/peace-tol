@@ -37,7 +37,6 @@ export const Button = ({
     <motion.button
       {...(!disabled ? { whileTap: { scale: 0.96 } } : {})}
       onAnimationComplete={(definition: Record<'scale', number>) => {
-        console.log(isClicked)
         if (definition.scale === 1 && isClicked) {
           onAnimationCompleteClick?.()
         }

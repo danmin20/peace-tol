@@ -57,7 +57,6 @@ export const Adventure = () => {
   }
 
   const handleNext = () => {
-    console.log('handleNext')
     setIsShoot(false)
     const isQuestionStage = stage === 3 || stage === 6
     if (isQuestionStage) {
