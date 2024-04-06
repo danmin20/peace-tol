@@ -59,6 +59,7 @@ module.exports = {
     'import/default': 'off',
     'import/no-named-as-default-member': 'off',
     'no-unused-vars': 'off',
+    'import/no-unresolved': ['error', { ignore: ['\\.svg\\?react$'] }],
     'unused-imports/no-unused-imports': 'off',
     'unused-imports/no-unused-vars': [
       'warn',
