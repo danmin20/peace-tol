@@ -10,7 +10,6 @@ export const HeaderStyle = css({
   width: '100%',
   padding: '0px 18px',
   backgroundColor: color.white,
-  boxSizing: 'border-box',
   position: 'absolute',
   top: 0,
   left: 0,

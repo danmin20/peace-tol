@@ -15,6 +15,7 @@ import { postUser } from '../../_common/api/user.api'
 import { Button } from '../../_common/components/Button'
 // import { Header } from '../../_common/components/Header'
 import { Splash } from '../../_common/components/Splash'
+import { SplashWrapper } from '../../_common/components/SplashWrapper'
 import { getUser, setUser } from '../../_common/utils/user'
 import { Check, Gun1, Gun2, Gun3 } from '../../assets'
 
@@ -60,8 +61,7 @@ export const LevelSelect = () => {
   }, [])
 
   return (
-    <>
-      <Splash />
+    <SplashWrapper splash={<Splash />}>
       {/* <Header handleBack={() => navigate('/')} /> */}
       <div css={LayoutStyle}>
         <div css={TextGroup}>
@@ -120,6 +120,6 @@ export const LevelSelect = () => {
           </Button>
         </div>
       </div>
-    </>
+    </SplashWrapper>
   )
 }

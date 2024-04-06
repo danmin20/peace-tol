@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Progress } from './components/Progress'
 import { Question } from './components/Question'
+import { RouteSplash } from './components/RouteSplash'
 import {
   Buttons,
   ContentStyle,
@@ -14,6 +15,7 @@ import {
 } from './style'
 import { Ballon } from '../../_common/components/Ballon'
 import { Header } from '../../_common/components/Header'
+import { SplashWrapper } from '../../_common/components/SplashWrapper'
 import { Pause, Play, Skip } from '../../assets'
 
 const parser = new DOMParser()
@@ -68,6 +70,7 @@ export const Route = () => {
     .body.innerHTML
 
   useEffect(() => {
+    if (scope.current == null) return
     animate(
       scope.current,
       { opacity: isPaused ? 0 : 1 },
@@ -76,7 +79,7 @@ export const Route = () => {
   }, [isPaused])
 
   return (
-    <>
+    <SplashWrapper splash={<RouteSplash />}>
       {isQuestionTime ? (
         <Question stage={stage} setIsQuestionTime={setIsQuestionTime} />
       ) : (
@@ -126,6 +129,6 @@ export const Route = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </SplashWrapper>
   )
 }
