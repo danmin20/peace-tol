@@ -19,7 +19,7 @@ const parser = new DOMParser()
 
 const dummy = [
   {
-    imagePath: '/bus1.png',
+    imagePath: '/bus_station.png',
     content: '먼저, 이곳에서 가장 가까운 <span>버스 정류장</span>으로 가세요',
     ballon: '시작이 반이니까요'
   },
@@ -75,8 +75,8 @@ export const Route = () => {
             handleBack={handleBack}
             extra={<Progress stage={stage} total={dummy.length} />}
           />
-          {dummy[stage].imagePath ? (
-            <img src={dummy[stage].imagePath} />
+          {dummy[stage - 1].imagePath ? (
+            <img src={dummy[stage - 1].imagePath} />
           ) : (
             <div css={EmptyStyle} />
           )}

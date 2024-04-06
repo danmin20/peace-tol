@@ -10,7 +10,11 @@ export const LayoutStyle = css({
   flexDirection: 'column',
   alignItems: 'center',
   boxSizing: 'border-box',
-  wordBreak: 'keep-all'
+  wordBreak: 'keep-all',
+
+  img: {
+    width: '100%'
+  }
 })
 
 export const EmptyStyle = css({
