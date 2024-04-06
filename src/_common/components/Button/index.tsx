@@ -1,5 +1,6 @@
 import { motion, HTMLMotionProps } from 'framer-motion'
 import Lottie from 'lottie-react'
+import { useState } from 'react'
 
 import { ButtonStyle, FullWidthButtonStyle, loadingLottieStyle } from './style'
 import loadingJson from '../../../assets/loading.json'
@@ -20,9 +21,11 @@ export const Button = ({
   disabled = false,
   colorType = 'primary',
   onAnimationCompleteClick,
+  onClick,
   children,
   ...props
 }: Props) => {
+  const [isClicked, setClicked] = useState(false)
   const backgroundColor =
     colorType === 'primary'
       ? color.red
@@ -34,9 +37,14 @@ export const Button = ({
     <motion.button
       {...(!disabled ? { whileTap: { scale: 0.96 } } : {})}
       onAnimationComplete={(definition: Record<'scale', number>) => {
-        if (definition.scale === 1) {
+        console.log(isClicked)
+        if (definition.scale === 1 && isClicked) {
           onAnimationCompleteClick?.()
         }
+      }}
+      onClick={(e) => {
+        setClicked(true)
+        onClick?.(e)
       }}
       css={isFullWidth ? FullWidthButtonStyle : ButtonStyle}
       style={{ backgroundColor: disabled ? color.gray3 : backgroundColor }}
