@@ -1,11 +1,10 @@
 import { ButtonStyle, Buttons, QStyle, QuestionStyle, Wrapper } from './style'
-import { Header } from '../../../../_common/components/Header'
 
 const questions: Record<
   number,
   { question: string; answers?: { value: string; content: string }[] }
 > = {
-  5: {
+  3: {
     question: '혹시 지금 상태는 어때요?',
     answers: [
       {
@@ -22,7 +21,7 @@ const questions: Record<
       }
     ]
   },
-  8: {
+  6: {
     question: '주위에 무엇이 있나요?',
     answers: [
       {
@@ -39,28 +38,33 @@ const questions: Record<
       }
     ]
   },
-  10: {
+  8: {
     question: '지금 한 사람을 생각해보세요'
   }
 }
 
 type Props = {
   stage: number
-  setIsQuestionTime: (value: boolean) => void
+  setStage: (stage: number) => void
+  setIsQuestionTime: (isQuestionTime: boolean) => void
 }
 
-export const Question = ({ stage, setIsQuestionTime }: Props) => {
-  // const content = questions[stage]
-  const content = questions[5]
+export const Question = ({ stage, setStage, setIsQuestionTime }: Props) => {
+  const content = questions[stage]
+
+  const handleConfirm = async () => {
+    // TODO: api handling
+    setStage(stage + 1)
+    setIsQuestionTime(false)
+  }
 
   return (
     <div css={Wrapper}>
-      <Header handleBack={() => setIsQuestionTime(false)} />
       <div css={QStyle}>Q</div>
       <div css={QuestionStyle}>{content.question}</div>
       <div css={Buttons}>
         {content.answers?.map((answer) => (
-          <button key={answer.value} css={ButtonStyle}>
+          <button key={answer.value} css={ButtonStyle} onClick={handleConfirm}>
             {answer.content}
           </button>
         ))}

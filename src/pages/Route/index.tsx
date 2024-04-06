@@ -29,6 +29,14 @@ const dummy = [
   {
     content: '오는 버스 아무거나 타세요!',
     ballon: '시작이 반이니까요'
+  },
+  {
+    content: 'zzz',
+    ballon: '시작이 반이니까요'
+  },
+  {
+    content: 'asdfasdf',
+    ballon: '시작이 반이니까요'
   }
 ]
 
@@ -37,36 +45,40 @@ export const Route = () => {
   const location = useLocation()
   const [scope, animate] = useAnimate()
 
-  const [stage, setStage] = useState<number>(1)
+  const [stage, setStage] = useState<number>(0)
   const [isPaused, setIsPaused] = useState<boolean>(false)
   const [isQuestionTime, setIsQuestionTime] = useState<boolean>(false)
 
   const handleBack = () => {
-    if (stage === 1) {
+    if (stage === 0) {
       navigate('/', {
         state: { level: location.state?.level ?? undefined }
       })
+      return
+    }
+    if (isQuestionTime) {
+      setIsQuestionTime(false)
       return
     }
     setStage(stage - 1)
   }
 
   const handleNext = () => {
-    if (stage === dummy.length) {
-      navigate('/survey')
-      return
-    }
-    // const isQuestionTime = stage === 5 || stage === 8 || stage === 10
-    const isQuestionTime = true
-    if (isQuestionTime) {
+    const isQuestionStage = stage === 3 || stage === 6 || stage === 8
+    if (isQuestionStage) {
       setIsQuestionTime(true)
       return
     }
 
     setStage(stage + 1)
+
+    // if (stage === dummy.length - 1) {
+    //   navigate('/survey')
+    //   return
+    // }
   }
 
-  const contentHtml = parser.parseFromString(dummy[stage].content, 'text/html')
+  const contentHtml = parser.parseFromString(dummy[stage]?.content, 'text/html')
     .body.innerHTML
 
   useEffect(() => {
@@ -78,18 +90,23 @@ export const Route = () => {
     )
   }, [isPaused])
 
+  console.log('isQuestionTime', isQuestionTime)
   return (
     <SplashWrapper splash={<RouteSplash />}>
+      <Header
+        handleBack={handleBack}
+        extra={<Progress stage={stage} total={dummy.length} />}
+      />
       {isQuestionTime ? (
-        <Question stage={stage} setIsQuestionTime={setIsQuestionTime} />
+        <Question
+          stage={stage}
+          setStage={setStage}
+          setIsQuestionTime={setIsQuestionTime}
+        />
       ) : (
         <div css={LayoutStyle}>
-          <Header
-            handleBack={handleBack}
-            extra={<Progress stage={stage} total={dummy.length} />}
-          />
-          {dummy[stage - 1].imagePath ? (
-            <img src={dummy[stage - 1].imagePath} />
+          {dummy[stage].imagePath ? (
+            <img src={dummy[stage].imagePath} />
           ) : (
             <div css={EmptyStyle} />
           )}
