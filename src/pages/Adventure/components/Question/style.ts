@@ -10,12 +10,12 @@ export const Wrapper = css({
   justifyContent: 'center',
   lineHeight: '20px',
   padding: '0px 49px',
-  marginTop: '159px'
+  marginTop: '100px'
 })
 
 export const QStyle = css({
   fontFamily: 'GeekbleMalang2',
-  fontSize: '40px',
+  fontSize: '35px',
   fontWeight: 400,
   color: color.red
 })
@@ -32,7 +32,7 @@ export const Buttons = css({
   display: 'flex',
   flexDirection: 'column',
   gap: '15px',
-  marginTop: '62px',
+  marginTop: '50px',
   width: '100%'
 })
 
