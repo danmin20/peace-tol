@@ -63,7 +63,7 @@ export const StageInfo = css`
   font-size: 16px;
   font-weight: 600;
   color: ${color.red};
-  margin-top: 43px;
+  margin-top: 31px;
 `
 
 export const FinishButtonStyle = css`

@@ -17,7 +17,7 @@ import { Button } from '../../_common/components/Button'
 import { Splash } from '../../_common/components/Splash'
 import { SplashWrapper } from '../../_common/components/SplashWrapper'
 import { getUser, setUser } from '../../_common/utils/user'
-import { Check, Gun1, Gun2, Gun3 } from '../../assets'
+import { Check, Gun1, Gun2, Gun3, GunLine } from '../../assets'
 
 type LevelType = {
   level: number
@@ -94,7 +94,7 @@ export const LevelSelect = () => {
           ))}
         </div>
 
-        {selectedLevel && (
+        {selectedLevel ? (
           <div css={StageInfo}>
             <div>{levelMap[selectedLevel].stage}단계로 이루어져 있어요.</div>
             <AnimatePresence mode="wait">
@@ -108,6 +108,15 @@ export const LevelSelect = () => {
                 {levelMap[selectedLevel].img}
               </motion.div>
             </AnimatePresence>
+          </div>
+        ) : (
+          <div
+            css={StageInfo}
+            style={{
+              marginTop: '106px'
+            }}
+          >
+            <GunLine />
           </div>
         )}
 
