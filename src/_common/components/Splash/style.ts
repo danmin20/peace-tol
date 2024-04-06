@@ -12,35 +12,52 @@ export const wrapperCss = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${color.red};
+  background-color: ${color.white};
   z-index: 2;
-`
-
-export const peaceTolTextCss = css`
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 19.09px;
-  margin-bottom: 30px;
-  opacity: 0.7;
-  color: ${color.white};
 `
 
 export const logoCss = css`
   width: 180px;
   height: 180px;
-  margin-bottom: 24px;
+  margin-bottom: 35px;
 `
 
 export const titleCss = css`
-  font-family: 'neurimboGothicRegular2';
-  margin-bottom: 21px;
-  font-size: 28px;
+  font-family: HANAMDAUM;
+  font-size: 24px;
   font-weight: 400;
-  line-height: 46.2px;
-  color: ${color.white};
+  line-height: 27.6px;
+  color: ${color.red};
 `
 
-export const subTitleCss = css`
+export const splash2WrapperCss = css`
+  ${wrapperCss}
+  background-color: ${color.red};
+`
+
+export const nameCss = css`
+  font-family: Montserrat;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 43.88px;
+  color: ${color.red2};
+  margin-bottom: 34px;
+`
+
+export const splash2TitleCss = css`
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 44px;
+  color: ${color.white};
+  text-align: center;
+  span {
+    font-weight: 700;
+  }
+`
+
+export const bottomTextCss = css`
+  position: absolute;
+  bottom: 130px;
   font-size: 18px;
   font-weight: 500;
   line-height: 21.48px;

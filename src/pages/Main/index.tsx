@@ -59,7 +59,7 @@ export const Main = () => {
   const navigate = useNavigate()
 
   return (
-    <SplashWrapper splash={<Splash />}>
+    <SplashWrapper timeout={4000} splash={<Splash />}>
       <div css={wrapperCss}>
         <Logo css={logoCss} />
         <div css={targetBoxCss}>

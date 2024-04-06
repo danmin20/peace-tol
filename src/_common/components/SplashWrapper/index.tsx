@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 
 type Props = {
   active?: boolean
-  loading?: boolean
   splash: React.ReactNode
   timeout?: number
   children: React.ReactNode
@@ -14,7 +13,6 @@ type Props = {
 
 export const SplashWrapper = ({
   active = true,
-  loading = false,
   splash,
   timeout = 2000,
   children,
@@ -44,9 +42,6 @@ export const SplashWrapper = ({
       >
         {show ? splash : children}
       </motion.div>
-      {
-        //TODO: loading이 true일 때 로딩 컴포넌트를 렌더링하기
-      }
     </AnimatePresence>
   )
 }
