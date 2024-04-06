@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import {
   ButtonGroup,
@@ -42,7 +42,6 @@ const levelMap = levels.reduce(
 )
 
 export const LevelSelect = () => {
-  const navigate = useNavigate()
   const location = useLocation()
 
   const [selectedLevel, setSelectedLevel] = useState<number>(
@@ -121,13 +120,7 @@ export const LevelSelect = () => {
         )}
 
         <div css={FinishButtonStyle}>
-          <Button
-            disabled={selectedLevel === undefined}
-            isFullWidth
-            onClick={() =>
-              navigate('/route', { state: { level: selectedLevel } })
-            }
-          >
+          <Button disabled={selectedLevel === undefined} isFullWidth>
             선택 완료!
           </Button>
         </div>

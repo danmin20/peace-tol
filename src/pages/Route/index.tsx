@@ -1,3 +1,4 @@
+import { useMutation } from '@tanstack/react-query'
 import { motion, AnimatePresence, useAnimate, cubicBezier } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -12,9 +13,11 @@ import {
   EmptyIcon,
   LayoutStyle
 } from './style'
+import { postAdventure } from '../../_common/api/adventure.api'
 import { Ballon } from '../../_common/components/Ballon'
 import { Header } from '../../_common/components/Header'
 import { SplashWrapper } from '../../_common/components/SplashWrapper'
+import { getUser } from '../../_common/utils/user'
 import { Pause, Play, Skip } from '../../assets'
 
 const parser = new DOMParser()
@@ -47,6 +50,21 @@ export const Route = () => {
   const [stage, setStage] = useState<number>(0)
   const [isPaused, setIsPaused] = useState<boolean>(false)
   const [isQuestionTime, setIsQuestionTime] = useState<boolean>(false)
+
+  const postAdventureMutate = useMutation(postAdventure)
+
+  const handleStart = async () => {
+    const uuid = getUser()
+    const difficulty = location.state?.level
+
+    if (uuid === null || !difficulty) return
+
+    await postAdventureMutate.mutateAsync({
+      userUuid: uuid,
+      difficulty
+    })
+    navigate('/route', { state: { level: difficulty } })
+  }
 
   const handleBack = () => {
     if (stage === 0) {
@@ -89,14 +107,20 @@ export const Route = () => {
     )
   }, [isPaused])
 
-  console.log('isQuestionTime', isQuestionTime)
+  useEffect(() => {
+    handleStart()
+  }, [])
+
   return (
-    <SplashWrapper splash={<RouteSplash />}>
+    <SplashWrapper
+      splash={<RouteSplash />}
+      loading={postAdventureMutate.isLoading}
+    >
       <Header
         handleBack={handleBack}
         extra={<Progress stage={stage} total={dummy.length} />}
       />
-      {isQuestionTime ? (
+      {isQuestionTime && (stage === 3 || stage === 6 || stage === 8) ? (
         <Question
           stage={stage}
           setStage={setStage}

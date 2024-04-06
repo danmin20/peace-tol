@@ -1,10 +1,12 @@
+import { useState } from 'react'
+
 import { ButtonStyle, Buttons, QStyle, QuestionStyle, Wrapper } from './style'
 
 const questions: Record<
-  number,
+  string,
   { question: string; answers?: { value: string; content: string }[] }
 > = {
-  3: {
+  condition1: {
     question: '혹시 지금 상태는 어때요?',
     answers: [
       {
@@ -21,7 +23,7 @@ const questions: Record<
       }
     ]
   },
-  6: {
+  condition2: {
     question: '주위에 무엇이 있나요?',
     answers: [
       {
@@ -38,21 +40,27 @@ const questions: Record<
       }
     ]
   },
-  8: {
+  person: {
     question: '지금 한 사람을 생각해보세요'
   }
 }
 
 type Props = {
-  stage: number
+  stage: 3 | 6 | 8
   setStage: (stage: number) => void
   setIsQuestionTime: (isQuestionTime: boolean) => void
 }
 
 export const Question = ({ stage, setStage, setIsQuestionTime }: Props) => {
-  const content = questions[stage]
+  const questionType = stage === 3 || stage === 6 ? 'condition1' : 'person'
 
-  const handleConfirm = async () => {
+  const [content, setContent] = useState(questions[questionType])
+
+  const handleConfirm = async (value: string) => {
+    if (value === 'FINE') {
+      setContent(questions['condition2'])
+      return
+    }
     // TODO: api handling
     setStage(stage + 1)
     setIsQuestionTime(false)
@@ -64,7 +72,11 @@ export const Question = ({ stage, setStage, setIsQuestionTime }: Props) => {
       <div css={QuestionStyle}>{content.question}</div>
       <div css={Buttons}>
         {content.answers?.map((answer) => (
-          <button key={answer.value} css={ButtonStyle} onClick={handleConfirm}>
+          <button
+            key={answer.value}
+            css={ButtonStyle}
+            onClick={() => handleConfirm(answer.value)}
+          >
             {answer.content}
           </button>
         ))}

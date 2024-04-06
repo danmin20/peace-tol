@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 
 type Props = {
   active?: boolean
+  loading?: boolean
   splash: React.ReactNode
   children: React.ReactNode
 } & AnimatePresenceProps
 
 export const SplashWrapper = ({
   active = true,
+  loading = false,
   splash,
   children,
   ...props
@@ -33,6 +35,7 @@ export const SplashWrapper = ({
       >
         {show ? splash : children}
       </motion.div>
+      {loading && <div>Loading...</div>}
     </AnimatePresence>
   )
 }
