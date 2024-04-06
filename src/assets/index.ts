@@ -3,6 +3,7 @@ export { default as Pause } from './pause.svg?react'
 export { default as Play } from './play.svg?react'
 export { default as Skip } from './skip.svg?react'
 
+export { default as Check } from './check.svg?react'
 export { default as Back } from './back.svg?react'
 
 export { default as Gun1 } from './gun1.svg?react'

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -6,15 +7,18 @@ import {
   FinishButtonStyle,
   LayoutStyle,
   StageInfo,
-  TextGroup
+  TextGroup,
+  checkIcon,
+  wrapperButton
 } from './style'
 import { Button } from '../../_common/components/Button'
 import { Header } from '../../_common/components/Header'
-import { Gun1, Gun2, Gun3 } from '../../assets'
+import { Check, Gun1, Gun2, Gun3 } from '../../assets'
 
 type LevelType = {
   level: number
   stage: number
+  label: string
   type: 'primary' | 'secondary' | 'tertiary'
   img: JSX.Element
 }
@@ -23,9 +27,9 @@ type LevelType = {
 // normal, hard -> 7개가 지나고 나서 요청
 
 const levels: LevelType[] = [
-  { level: 1, stage: 5, type: 'tertiary', img: <Gun1 /> },
-  { level: 2, stage: 8, type: 'secondary', img: <Gun2 /> },
-  { level: 3, stage: 10, type: 'primary', img: <Gun3 /> }
+  { level: 1, stage: 5, label: 'easy', type: 'tertiary', img: <Gun1 /> },
+  { level: 2, stage: 8, label: 'normal', type: 'secondary', img: <Gun2 /> },
+  { level: 3, stage: 10, label: 'hard', type: 'primary', img: <Gun3 /> }
 ]
 
 const levelMap = levels.reduce(
@@ -40,7 +44,9 @@ export const LevelSelect = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const [level, setLevel] = useState<number>(location.state?.level ?? undefined)
+  const [selectedLevel, setSelectedLevel] = useState<number>(
+    location.state?.level ?? undefined
+  )
 
   return (
     <>
@@ -54,29 +60,39 @@ export const LevelSelect = () => {
         </div>
 
         <div css={ButtonGroup}>
-          {levels.map(({ level, type }) => (
-            <Button
-              key={level}
-              colorType={type}
-              onClick={() => setLevel(level)}
-            >
-              {level}단계
-            </Button>
+          {levels.map(({ level, label, type }) => (
+            <div key={level} css={wrapperButton}>
+              {level === selectedLevel && (
+                <motion.div
+                  initial={{ y: -5 }}
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ repeat: Infinity }}
+                  css={checkIcon}
+                >
+                  <Check />
+                </motion.div>
+              )}
+              <Button colorType={type} onClick={() => setSelectedLevel(level)}>
+                {label.toUpperCase()}
+              </Button>
+            </div>
           ))}
         </div>
 
-        {level && (
+        {selectedLevel && (
           <div css={StageInfo}>
-            <div>{levelMap[level].stage}단계로 이루어져 있어요.</div>
-            {levelMap[level].img}
+            <div>{levelMap[selectedLevel].stage}단계로 이루어져 있어요.</div>
+            {levelMap[selectedLevel].img}
           </div>
         )}
 
         <div css={FinishButtonStyle}>
           <Button
-            disabled={level === undefined}
+            disabled={selectedLevel === undefined}
             isFullWidth
-            onClick={() => navigate('/route', { state: { level } })}
+            onClick={() =>
+              navigate('/route', { state: { level: selectedLevel } })
+            }
           >
             선택 완료!
           </Button>
