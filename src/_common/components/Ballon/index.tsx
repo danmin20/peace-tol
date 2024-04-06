@@ -1,14 +1,16 @@
+import { HTMLMotionProps, motion } from 'framer-motion'
+
 import { AlertBallonStyle, BallonStyle } from './style'
 
 type Props = {
   children: React.ReactNode
   isAlert?: boolean
-} & React.HTMLAttributes<HTMLDivElement>
+} & HTMLMotionProps<'div'>
 
 export const Ballon = ({ children, isAlert = false, ...props }: Props) => {
   return (
-    <div css={isAlert ? AlertBallonStyle : BallonStyle} {...props}>
+    <motion.div css={isAlert ? AlertBallonStyle : BallonStyle} {...props}>
       {children}
-    </div>
+    </motion.div>
   )
 }

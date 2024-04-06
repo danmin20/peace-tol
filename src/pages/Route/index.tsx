@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useAnimate } from 'framer-motion'
+import { motion, AnimatePresence, useAnimate, cubicBezier } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -28,7 +28,7 @@ const dummy = [
   },
   {
     content: '오는 버스 아무거나 타세요!',
-    ballon: '시작이 반이니까요'
+    ballon: '먼저, 이곳에서 가장 가까운 버스 정류장으로 가세요'
   }
 ]
 
@@ -79,7 +79,7 @@ export const Route = () => {
   }, [isPaused])
 
   return (
-    <SplashWrapper splash={<RouteSplash />}>
+    <SplashWrapper active={false} splash={<RouteSplash />}>
       {isQuestionTime ? (
         <Question stage={stage} setIsQuestionTime={setIsQuestionTime} />
       ) : (
@@ -96,7 +96,32 @@ export const Route = () => {
 
           <div css={ContentStyle}>
             <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
-            <Ballon>{dummy[stage].ballon}</Ballon>
+            <Ballon
+              key={stage}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.5,
+                ease: cubicBezier(0.34, 1.56, 0.64, 1)
+              }}
+            >
+              {dummy[stage].ballon.split('').map((textItem, idx) => (
+                <motion.span
+                  key={textItem + idx}
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: 'auto' }}
+                  transition={{ duration: 0.1, delay: 1 + idx * 0.08 }}
+                  style={{
+                    // NOTE: 공백이 들어갈 경우 inline 처리하여 사이즈를 잡아줌
+                    display: textItem === ' ' ? 'inline' : 'inline-block'
+                  }}
+                >
+                  {textItem}
+                </motion.span>
+              ))}
+            </Ballon>
           </div>
 
           <div css={Buttons}>
