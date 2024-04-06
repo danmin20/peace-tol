@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+import { Progress } from './components/Progress'
 import {
   Buttons,
   ContentStyle,
@@ -58,7 +59,10 @@ export const Route = () => {
   return (
     <>
       <div css={LayoutStyle}>
-        <Header handleBack={handleBack} />
+        <Header
+          handleBack={handleBack}
+          extra={<Progress stage={stage} total={dummy.length} />}
+        />
         {dummy[stage].imagePath ? (
           <img src={dummy[stage].imagePath} />
         ) : (

@@ -5,9 +5,10 @@ import { color } from '../../styles/color'
 export const HeaderStyle = css({
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'space-between',
   height: '50px',
   width: '100%',
-  paddingLeft: '18px',
+  padding: '0px 18px',
   backgroundColor: color.white,
   boxSizing: 'border-box',
   position: 'absolute',
