@@ -34,11 +34,7 @@ export const Adventure = () => {
   const totalStage =
     location.state?.level === 1 ? 4 : location.state?.level === 2 ? 7 : 9
 
-  const {
-    data: adventure,
-    isLoading,
-    refetch
-  } = useGetAdventure(adventureId, {
+  const { data: adventure, refetch } = useGetAdventure(adventureId, {
     enabled: adventureId !== null
   })
 
@@ -107,7 +103,7 @@ export const Adventure = () => {
   const contentHtml = getContentHtml(adventure?.missions[stage]?.body ?? '')
 
   return (
-    <SplashWrapper splash={<AdventureSplash />} loading={isLoading}>
+    <SplashWrapper splash={<AdventureSplash />}>
       <Header
         handleBack={handleBack}
         extra={<Progress stage={stage} total={totalStage + 1} />}
