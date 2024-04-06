@@ -1,4 +1,5 @@
 import { motion, HTMLMotionProps } from 'framer-motion'
+import { useRef } from 'react'
 
 import { ButtonStyle, FullWidthButtonStyle } from './style'
 import { color } from '../../styles/color'
@@ -8,12 +9,14 @@ type Props = {
   disabled?: boolean
   colorType?: 'primary' | 'secondary' | 'tertiary'
   children: React.ReactNode
+  onAnimationCompleteClick?: () => void
 } & HTMLMotionProps<'button'>
 
 export const Button = ({
   isFullWidth = false,
   disabled = false,
   colorType = 'primary',
+  onAnimationCompleteClick,
   children,
   ...props
 }: Props) => {
@@ -27,6 +30,11 @@ export const Button = ({
   return (
     <motion.button
       {...(!disabled ? { whileTap: { scale: 0.96 } } : {})}
+      onAnimationComplete={(definition: Record<'scale', number>) => {
+        if (definition.scale === 1) {
+          onAnimationCompleteClick?.()
+        }
+      }}
       css={isFullWidth ? FullWidthButtonStyle : ButtonStyle}
       style={{ backgroundColor: disabled ? color.gray3 : backgroundColor }}
       disabled={disabled}

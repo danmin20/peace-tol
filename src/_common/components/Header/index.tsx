@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 import { HeaderStyle } from './style'
 import { Back } from '../../../assets'
 
@@ -9,7 +11,9 @@ type Props = {
 export const Header = ({ extra, handleBack }: Props) => {
   return (
     <div css={HeaderStyle}>
-      <Back onClick={handleBack} />
+      <motion.div whileTap={{ scale: 0.9 }}>
+        <Back onClick={handleBack} />
+      </motion.div>
       {extra}
     </div>
   )

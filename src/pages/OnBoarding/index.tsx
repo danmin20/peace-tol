@@ -14,7 +14,7 @@ export const OnBoarding = () => {
   return (
     <SplashWrapper splash={<Splash />}>
       <div>온보딩 페이지</div>
-      <Button isFullWidth onClick={handleStartClick}>
+      <Button onAnimationCompleteClick={handleStartClick} isFullWidth>
         시작하기
       </Button>
     </SplashWrapper>
