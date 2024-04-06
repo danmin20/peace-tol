@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import {
   ButtonGroup,
@@ -19,6 +19,9 @@ type LevelType = {
   img: JSX.Element
 }
 
+// easy, normal, hard -> 4개가 지나고 나서 요청
+// normal, hard -> 7개가 지나고 나서 요청
+
 const levels: LevelType[] = [
   { level: 1, stage: 5, type: 'tertiary', img: <Gun1 /> },
   { level: 2, stage: 8, type: 'secondary', img: <Gun2 /> },
@@ -33,10 +36,11 @@ const levelMap = levels.reduce(
   {} as Record<number, (typeof levels)[0]>
 )
 
-export const LevelCheck = () => {
+export const LevelSelect = () => {
   const navigate = useNavigate()
+  const location = useLocation()
 
-  const [level, setLevel] = useState<number>()
+  const [level, setLevel] = useState<number>(location.state?.level ?? undefined)
 
   return (
     <>
@@ -69,7 +73,11 @@ export const LevelCheck = () => {
         )}
 
         <div css={FinishButtonStyle}>
-          <Button disabled={level === undefined} isFullWidth>
+          <Button
+            disabled={level === undefined}
+            isFullWidth
+            onClick={() => navigate('/route', { state: { level } })}
+          >
             선택 완료!
           </Button>
         </div>

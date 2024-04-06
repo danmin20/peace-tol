@@ -5,7 +5,7 @@ type Props = {
   isFullWidth?: boolean
   disabled?: boolean
   colorType?: 'primary' | 'secondary' | 'tertiary'
-  children?: React.ReactNode
+  children: React.ReactNode
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 export const Button = ({
