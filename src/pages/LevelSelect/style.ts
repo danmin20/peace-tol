@@ -27,6 +27,9 @@ export const TextGroup = css`
       font-weight: 600;
       color: ${color.gray2};
     }
+    span {
+      color: ${color.red};
+    }
   }
 `
 
