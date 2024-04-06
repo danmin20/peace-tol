@@ -17,8 +17,8 @@ export const wrapperCss = css`
 `
 
 export const logoCss = css`
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   margin-bottom: 35px;
 `
 
@@ -50,6 +50,7 @@ export const splash2TitleCss = css`
   line-height: 44px;
   color: ${color.white};
   text-align: center;
+  margin-bottom: 100px;
   span {
     font-weight: 700;
   }
