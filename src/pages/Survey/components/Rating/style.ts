@@ -40,21 +40,20 @@ export const radioCss = css`
 
 export const ratingTextContainerCss = css`
   position: absolute;
-  top: 46px;
+  top: 35px;
   left: 50%;
   transform: translateX(-50%);
 `
 
 export const numberCss = css`
-  margin-bottom: 12px;
   font-family: GeekbleMalang2;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 400;
   line-height: 32px;
 `
 
 export const labelCss = css`
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 32px;
   text-align: center;

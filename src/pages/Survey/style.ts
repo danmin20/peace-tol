@@ -18,12 +18,12 @@ export const iconCss = css`
 `
 
 export const titleCss = css`
-  font-size: 27px;
+  font-size: 24px;
   font-weight: 700;
   line-height: 32px;
   text-align: center;
   white-space: nowrap;
-  margin-bottom: 86px;
+  margin-bottom: 60px;
 `
 
 export const spacingCss = css`
