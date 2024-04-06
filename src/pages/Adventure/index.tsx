@@ -31,17 +31,19 @@ export const Adventure = () => {
   const postFinalStepMutation = usePostFinalStepMutation()
 
   const adventureId = location.pathname.split('/adventure/')[1]
-  const totalStage =
-    location.state?.level === 1 ? 4 : location.state?.level === 2 ? 7 : 9
 
   const { data: adventure, refetch } = useGetAdventure(adventureId, {
     enabled: adventureId !== null
   })
 
+  const level: number = adventure?.difficulty ?? location.state?.level
+
+  const totalStage = level === 1 ? 4 : level === 2 ? 7 : 9
+
   const handleBack = () => {
     if (stage === 0) {
       navigate('/', {
-        state: { level: location.state?.level ?? undefined }
+        state: { level: level ?? undefined }
       })
       return
     }
@@ -53,7 +55,6 @@ export const Adventure = () => {
   }
 
   const handleNext = () => {
-    console.log(adventure?.endedAt)
     setIsShoot(false)
     const isQuestionStage = !adventure?.endedAt && (stage === 3 || stage === 6)
 
@@ -65,6 +66,11 @@ export const Adventure = () => {
     setStage(stage + 1)
 
     if (!adventure?.missions || stage === totalStage) {
+      // 내가 이미 만들었던 모험일 경우 만족도 조사 안 함
+      // if (adventure?.endedAt && adventure?.createdBy === getUser()) {
+      //   navigate('/')
+      //   return
+      // }
       navigate('/survey', {
         state: { adventureId }
       })
