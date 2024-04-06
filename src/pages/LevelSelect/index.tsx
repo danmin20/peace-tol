@@ -124,7 +124,7 @@ export const LevelSelect = () => {
           <Button
             disabled={selectedLevel === undefined}
             isFullWidth
-            onClick={() =>
+            onAnimationCompleteClick={() =>
               navigate('/route', { state: { level: selectedLevel } })
             }
           >

@@ -46,7 +46,7 @@ export const Route = () => {
 
   const [stage, setStage] = useState<number>(0)
   const [isPaused, setIsPaused] = useState<boolean>(false)
-  const [isQuestionTime, setIsQuestionTime] = useState<boolean>(false)
+  const [isQuestionTime, setIsQuestionTime] = useState<boolean>(true)
 
   const handleBack = () => {
     if (stage === 0) {
@@ -89,7 +89,6 @@ export const Route = () => {
     )
   }, [isPaused])
 
-  console.log('isQuestionTime', isQuestionTime)
   return (
     <SplashWrapper splash={<RouteSplash />}>
       <Header
@@ -149,10 +148,12 @@ export const Route = () => {
           </div>
 
           <div css={Buttons}>
-            <span ref={scope}>
+            <motion.div ref={scope} whileTap={{ scale: 0.9 }}>
               <Pause onClick={() => setIsPaused(true)} />
-            </span>
-            <Skip onClick={handleNext} />
+            </motion.div>
+            <motion.div whileTap={{ scale: 0.9 }}>
+              <Skip onClick={handleNext} />
+            </motion.div>
           </div>
         </div>
       )}
@@ -172,7 +173,9 @@ export const Route = () => {
               준비가 되면 다시 시작해주세요!
             </Ballon>
             <div css={Buttons}>
-              <Play onClick={() => setIsPaused(false)} />
+              <motion.div whileTap={{ scale: 0.9 }}>
+                <Play onClick={() => setIsPaused(false)} />
+              </motion.div>
               <div css={EmptyIcon} />
             </div>
           </motion.div>
