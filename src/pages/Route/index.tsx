@@ -46,7 +46,7 @@ export const Route = () => {
 
   const [stage, setStage] = useState<number>(0)
   const [isPaused, setIsPaused] = useState<boolean>(false)
-  const [isQuestionTime, setIsQuestionTime] = useState<boolean>(true)
+  const [isQuestionTime, setIsQuestionTime] = useState<boolean>(false)
 
   const handleBack = () => {
     if (stage === 0) {
