@@ -6,6 +6,7 @@ type Props = {
   active?: boolean
   loading?: boolean
   splash: React.ReactNode
+  timeout?: number
   children: React.ReactNode
   style?: React.CSSProperties
   css?: Interpolation<Theme>
@@ -15,6 +16,7 @@ export const SplashWrapper = ({
   active = true,
   loading = false,
   splash,
+  timeout = 2000,
   children,
   style,
   css,
@@ -25,7 +27,7 @@ export const SplashWrapper = ({
   useEffect(() => {
     const timerId = setTimeout(() => {
       setShow(false)
-    }, 2000)
+    }, timeout)
 
     return () => clearTimeout(timerId)
   }, [])
@@ -42,7 +44,9 @@ export const SplashWrapper = ({
       >
         {show ? splash : children}
       </motion.div>
-      {loading && <div>Loading...</div>}
+      {
+        //TODO: loading이 true일 때 로딩 컴포넌트를 렌더링하기
+      }
     </AnimatePresence>
   )
 }

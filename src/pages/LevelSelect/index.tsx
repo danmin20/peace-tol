@@ -4,9 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import {
   ButtonGroup,
-  FinishButtonStyle,
   LayoutStyle,
-  StageInfo,
+  stageInfo,
   TextGroup,
   checkIcon,
   wrapperButton
@@ -14,9 +13,7 @@ import {
 import { usePostAdventureMutation } from '../../_common/api/adventure.api'
 import { postUser } from '../../_common/api/user.api'
 import { Button } from '../../_common/components/Button'
-// import { Header } from '../../_common/components/Header'
-import { Splash } from '../../_common/components/Splash'
-import { SplashWrapper } from '../../_common/components/SplashWrapper'
+import { Header } from '../../_common/components/Header'
 import { getUser, setUser } from '../../_common/utils/user'
 import { Check, Gun1, Gun2, Gun3, GunLine } from '../../assets'
 
@@ -78,11 +75,8 @@ export const LevelSelect = () => {
   }, [])
 
   return (
-    <SplashWrapper
-      active={location.state?.level === undefined}
-      splash={<Splash />}
-    >
-      {/* <Header handleBack={() => navigate('/')} /> */}
+    <>
+      <Header handleBack={() => navigate('/')} />
       <div css={LayoutStyle}>
         <div css={TextGroup}>
           <div>
@@ -98,7 +92,7 @@ export const LevelSelect = () => {
                 <motion.div
                   initial={{ y: -5 }}
                   animate={{ y: [0, -5, 0] }}
-                  transition={{ repeat: Infinity }}
+                  transition={{ duration: 1, repeat: Infinity }}
                   css={checkIcon}
                 >
                   <Check />
@@ -112,7 +106,7 @@ export const LevelSelect = () => {
         </div>
 
         {selectedLevel ? (
-          <div css={StageInfo}>
+          <div css={stageInfo}>
             <div>{levelMap[selectedLevel].stage}단계로 이루어져 있어요.</div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -127,27 +121,21 @@ export const LevelSelect = () => {
             </AnimatePresence>
           </div>
         ) : (
-          <div
-            css={StageInfo}
-            style={{
-              marginTop: '106px'
-            }}
-          >
+          <div css={stageInfo} style={{ marginTop: '100px' }}>
             <GunLine />
           </div>
         )}
 
-        <div css={FinishButtonStyle}>
-          <Button
-            disabled={selectedLevel === undefined}
-            isFullWidth
-            onAnimationCompleteClick={createAdventure}
-            isLoading={postAdventureMutation.isLoading}
-          >
-            선택 완료!
-          </Button>
-        </div>
+        <div style={{ height: '100%' }} />
+        <Button
+          disabled={selectedLevel === undefined}
+          isFullWidth
+          onAnimationCompleteClick={createAdventure}
+          isLoading={postAdventureMutation.isLoading}
+        >
+          선택 완료!
+        </Button>
       </div>
-    </SplashWrapper>
+    </>
   )
 }
