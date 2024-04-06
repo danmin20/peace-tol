@@ -13,7 +13,5 @@ export const innerCss = css({
   minWidth: '360px',
   maxWidth: '448px',
   margin: '0 auto',
-  paddingTop: '50px',
-  boxSizing: 'border-box',
   backgroundColor: '#fff'
 })

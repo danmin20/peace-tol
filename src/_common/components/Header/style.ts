@@ -16,3 +16,7 @@ export const HeaderStyle = css({
   right: 0,
   zIndex: 1
 })
+
+export const spacingCss = css({
+  height: '50px'
+})
