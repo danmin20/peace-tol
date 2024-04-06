@@ -66,8 +66,8 @@ export const LevelSelect = () => {
       difficulty: selectedLevel
     })
 
-    navigate('/route', {
-      state: { level: selectedLevel, adventureId: data.id }
+    navigate(`/route/${data.id}`, {
+      state: { level: selectedLevel }
     })
   }
 

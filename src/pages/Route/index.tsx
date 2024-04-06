@@ -22,12 +22,14 @@ export const Route = () => {
   const [isQuestionTime, setIsQuestionTime] = useState<boolean>(false)
   const [isShoot, setIsShoot] = useState<boolean>(false)
 
+  const adventureId = location.pathname.split('/route/')[1]
+
   const {
     data: adventure,
     isLoading,
     refetch
-  } = useGetAdventure(location.state.adventureId, {
-    enabled: location.state.adventureId !== null
+  } = useGetAdventure(adventureId, {
+    enabled: adventureId !== null
   })
 
   const handleBack = () => {

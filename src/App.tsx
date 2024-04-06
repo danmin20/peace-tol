@@ -15,7 +15,7 @@ export const App = () => {
         <Route index element={<LevelSelect />} />
         {/* <Route path="main" element={<Main />} /> */}
         {/* <Route path="level-select" element={<LevelSelect />} /> */}
-        <Route path="route" element={<RoutePage />} />
+        <Route path="route/:id" element={<RoutePage />} />
         <Route path="survey" element={<Survey />} />
         <Route path="review" element={<Review />} />
       </Route>
