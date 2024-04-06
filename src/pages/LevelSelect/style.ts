@@ -38,7 +38,7 @@ export const TextGroup = css`
 export const ButtonGroup = css`
   display: flex;
   gap: 19px;
-  margin-top: 48px;
+  margin-top: 25px;
   align-items: center;
   justify-content: center;
   button {
@@ -58,14 +58,15 @@ export const checkIcon = css`
 `
 
 export const stageInfo = css`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 15px;
   align-items: center;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
+  margin-top: 30px;
   color: ${color.red};
-  margin-top: 31px;
 
   svg {
     width: 200px;

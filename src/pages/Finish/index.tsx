@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-import { logoCss, titleCss, wrapperCss, clipboard, alert } from './style'
+import { logoCss, titleCss, wrapperCss, clipboard } from './style'
+import { Button } from '../../_common/components/Button'
 import { TargetBox } from '../../_common/components/TargetBox'
+import { color } from '../../_common/styles/color'
 import { Logo, Link } from '../../assets'
 
 export const Finish = () => {
   const prevTargetCount = 7 //FIXME: API로 받아오기
 
+  const navigate = useNavigate()
   const location = useLocation()
 
   const [isCopied, setIsCopied] = useState(false)
@@ -18,7 +21,7 @@ export const Finish = () => {
     if (!adventureId) return
 
     await navigator.clipboard.writeText(
-      `https://peace-tol.com/adventure/${adventureId}`
+      `https://peace-tol.netlify.app/adventure/${adventureId}`
     )
     setIsCopied(true)
   }
@@ -33,11 +36,22 @@ export const Finish = () => {
       </h1>
       <TargetBox targetCount={prevTargetCount} />
 
-      <div css={clipboard} onClick={handleCopyClipBoard}>
+      <div
+        css={clipboard}
+        onClick={handleCopyClipBoard}
+        style={{
+          color: isCopied ? color.red : color.gray2
+        }}
+      >
         <Link />
-        <div>친구에게 공유하기</div>
+        <div>
+          {isCopied ? '링크가 클립보드에 복사되었습니다.' : '친구에게 공유하기'}
+        </div>
       </div>
-      {isCopied && <div css={alert}>링크가 클립보드에 복사되었습니다.</div>}
+
+      <Button onClick={() => navigate('/')} isFullWidth>
+        메인으로 가기
+      </Button>
     </div>
   )
 }

@@ -8,11 +8,11 @@ export const wrapperCss = css`
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 0 30px;
+  padding: 62px 30px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   background-color: ${color.white};
@@ -20,35 +20,29 @@ export const wrapperCss = css`
 `
 
 export const logoCss = css`
-  width: 90px;
-  height: 90px;
-  margin-bottom: 40px;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 35px;
 `
 
 export const titleCss = css`
   font-size: 24px;
   font-weight: 700;
   line-height: 35px;
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 `
 
 export const clipboard = css`
+  svg {
+    width: 23px;
+  }
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  margin-top: 50px;
-  font-size: 19px;
+  margin: 15px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 31.54px;
-  color: ${color.gray2};
-`
-
-export const alert = css`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  color: ${color.red};
-  margin-top: 30px;
 `
