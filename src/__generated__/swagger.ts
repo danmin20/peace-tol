@@ -27,6 +27,7 @@ export interface AdventureResponseDto {
   /** @format date-time */
   endedAt: string
   difficulty: number
+  createdBy: string
   missions: MissionDto[]
 }
 

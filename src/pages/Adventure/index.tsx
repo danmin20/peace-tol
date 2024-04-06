@@ -67,10 +67,10 @@ export const Adventure = () => {
 
     if (!adventure?.missions || stage === totalStage) {
       // 내가 이미 만들었던 모험일 경우 만족도 조사 안 함
-      // if (adventure?.endedAt && adventure?.createdBy === getUser()) {
-      //   navigate('/')
-      //   return
-      // }
+      if (adventure?.endedAt && adventure?.createdBy === getUser()) {
+        navigate('/')
+        return
+      }
       navigate('/survey', {
         state: { adventureId }
       })
