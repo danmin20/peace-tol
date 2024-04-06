@@ -1,7 +1,8 @@
-import './App.css'
+import { css } from '@emotion/react'
 
-function App() {
-  return <>App</>
+export const App = () => {
+  return <div css={containerCss}>App</div>
 }
-
-export default App
+const containerCss = css({
+  backgroundColor: 'red'
+})

@@ -1,27 +1,29 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
-    jest: true
+    node: true,
+    es2021: true
   },
   globals: {
     JSX: 'readonly'
   },
-  plugins: ['unused-imports'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'unused-imports', 'prettier'],
   extends: [
-    'react-app',
     'eslint:recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    'prettier'
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended'
   ],
-
   settings: {
     react: {
       version: 'detect'
     },
     'import/resolver': {
-      typescript: {}
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+      }
     }
   },
 
@@ -35,6 +37,7 @@ module.exports = {
   ],
 
   rules: {
+    'no-undef': 'off',
     'import/order': [
       'warn',
       {
@@ -56,7 +59,7 @@ module.exports = {
     'import/default': 'off',
     'import/no-named-as-default-member': 'off',
     'no-unused-vars': 'off',
-    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-imports': 'off',
     'unused-imports/no-unused-vars': [
       'warn',
       {
