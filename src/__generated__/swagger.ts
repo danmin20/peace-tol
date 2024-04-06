@@ -14,7 +14,7 @@ export interface CreateUserDto {
   uuid: string
 }
 
-export interface Mission {
+export interface MissionDto {
   body: string
   quote: string
   imagePath: string
@@ -27,7 +27,7 @@ export interface AdventureResponseDto {
   /** @format date-time */
   endedAt: string
   difficulty: number
-  missions: Mission[]
+  missions: MissionDto[]
 }
 
 export interface CreateAdventureDto {
@@ -37,6 +37,11 @@ export interface CreateAdventureDto {
 
 export interface AdventureCreationResponseDto {
   id: number
+}
+
+export interface AddNextStepForAdventureDto {
+  userUuid: string
+  answerType: string
 }
 
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios'
@@ -254,6 +259,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<AdventureCreationResponseDto, any>({
         path: `/api/v1/adventures`,
         method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdventureController
+     * @name AdventureControllerAddNextStep
+     * @summary 모험의 다음 단계 생성
+     * @request PUT:/api/v1/adventures/{id}/next-step
+     */
+    adventureControllerAddNextStep: (id: string, data: AddNextStepForAdventureDto, params: RequestParams = {}) =>
+      this.request<AdventureCreationResponseDto, any>({
+        path: `/api/v1/adventures/${id}/next-step`,
+        method: 'PUT',
         body: data,
         type: ContentType.Json,
         format: 'json',

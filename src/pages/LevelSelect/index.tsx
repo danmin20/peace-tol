@@ -11,7 +11,7 @@ import {
   checkIcon,
   wrapperButton
 } from './style'
-import { postAdventure } from '../../_common/api/adventure.api'
+import { usePostAdventureMutation } from '../../_common/api/adventure.api'
 import { postUser } from '../../_common/api/user.api'
 import { Button } from '../../_common/components/Button'
 // import { Header } from '../../_common/components/Header'
@@ -46,6 +46,8 @@ export const LevelSelect = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const postAdventureMutation = usePostAdventureMutation()
+
   const [selectedLevel, setSelectedLevel] = useState<number>(
     location.state?.level ?? undefined
   )
@@ -61,7 +63,7 @@ export const LevelSelect = () => {
     const uuid = getUser()
     if (uuid === null || selectedLevel === undefined) return
 
-    const data = await postAdventure({
+    const data = await postAdventureMutation.mutateAsync({
       userUuid: uuid,
       difficulty: selectedLevel
     })
@@ -140,6 +142,7 @@ export const LevelSelect = () => {
             disabled={selectedLevel === undefined}
             isFullWidth
             onAnimationCompleteClick={createAdventure}
+            isLoading={postAdventureMutation.isLoading}
           >
             선택 완료!
           </Button>

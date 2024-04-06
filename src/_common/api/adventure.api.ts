@@ -2,11 +2,13 @@ import {
   QueryKey,
   UseQueryOptions,
   UseQueryResult,
+  useMutation,
   useQuery
 } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
 import {
+  AddNextStepForAdventureDto,
   AdventureResponseDto,
   CreateAdventureDto
 } from '../../__generated__/swagger'
@@ -34,20 +36,50 @@ export const useGetAdventure = <TData = AdventureResponseDto>(
   )
 }
 
-export const postAdventure = async (body: CreateAdventureDto) => {
+const postAdventure = async (body: CreateAdventureDto) => {
   const data =
     await swaggerApi.adventureController.adventureControllerCreate(body)
   return data.data
 }
 
-export const postNextStep = async (body: CreateAdventureDto) => {
+export const usePostAdventureMutation = () => {
+  return useMutation(postAdventure)
+}
+
+type AddNextStepForAdventureBody = {
+  id: string
+  body: AddNextStepForAdventureDto
+}
+
+const postNextStep = async ({ id, body }: AddNextStepForAdventureBody) => {
   const data =
-    await swaggerApi.adventureController.adventureControllerCreate(body)
+    await swaggerApi.adventureController.adventureControllerAddNextStep(
+      id,
+      body
+    )
   return data.data
 }
 
-export const postFinalStep = async (body: CreateAdventureDto) => {
+export const usePostNextStepMutation = () => {
+  return useMutation(postNextStep)
+}
+
+const postFinalStep = async (id: number) => {
   const data =
-    await swaggerApi.adventureController.adventureControllerCreate(body)
+    await swaggerApi.adventureController.adventureControllerAddFinalStep(id)
   return data.data
+}
+
+export const usePostFinalStepMutation = () => {
+  return useMutation(postFinalStep)
+}
+
+const postFinishStep = async (id: number) => {
+  const data =
+    await swaggerApi.adventureController.adventureControllerFinishAdventure(id)
+  return data.data
+}
+
+export const usePostFinishStepMutation = () => {
+  return useMutation(postFinishStep)
 }

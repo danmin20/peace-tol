@@ -6,10 +6,14 @@ import { AdventureSplash } from './components/AdventureSplash'
 import { Progress } from './components/Progress'
 import { Question } from './components/Question'
 import { BullseyeText, ContentStyle, EndButton, LayoutStyle } from './style'
-import { useGetAdventure } from '../../_common/api/adventure.api'
+import {
+  useGetAdventure,
+  usePostNextStepMutation
+} from '../../_common/api/adventure.api'
 import { Ballon } from '../../_common/components/Ballon'
 import { Header } from '../../_common/components/Header'
 import { SplashWrapper } from '../../_common/components/SplashWrapper'
+import { getUser } from '../../_common/utils/user'
 import { Bullseye, LogoFilled } from '../../assets'
 
 const parser = new DOMParser()
@@ -22,7 +26,11 @@ export const Adventure = () => {
   const [isQuestionTime, setIsQuestionTime] = useState<boolean>(false)
   const [isShoot, setIsShoot] = useState<boolean>(false)
 
+  const postNextStepMutation = usePostNextStepMutation()
+
   const adventureId = location.pathname.split('/adventure/')[1]
+  const totalStage =
+    location.state?.level === 1 ? 4 : location.state?.level === 2 ? 7 : 9
 
   const {
     data: adventure,
@@ -47,6 +55,7 @@ export const Adventure = () => {
   }
 
   const handleNext = () => {
+    console.log('handleNext')
     const isQuestionStage = stage === 3 || stage === 6
     if (isQuestionStage) {
       setIsQuestionTime(true)
@@ -55,19 +64,28 @@ export const Adventure = () => {
 
     setStage(stage + 1)
 
-    if (!adventure?.missions || stage === adventure?.missions.length - 1) {
+    if (!adventure?.missions || stage === totalStage) {
       navigate('/survey')
       return
     }
   }
 
   const handleQuestion = async () => {
+    const userUuid = getUser()
+    if (!userUuid) return
+
     if (stage === 3) {
-      // next step
+      await postNextStepMutation.mutateAsync({
+        id: adventureId,
+        body: {
+          userUuid,
+          answerType: ''
+        }
+      })
       await refetch()
     }
     if (stage === 6) {
-      // final step
+      // await postFinalStep(adventureId)
       await refetch()
     }
     setStage(stage + 1)
