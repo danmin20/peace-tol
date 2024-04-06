@@ -7,7 +7,7 @@ import {
   targetBoxCss,
   targetIconCss
 } from './style'
-import { LogoFilled, LogoEmpty } from '../../../assets'
+import { Logo, LogoEmpty } from '../../../assets'
 import { color } from '../../styles/color'
 
 type Props = {
@@ -38,7 +38,7 @@ export const TargetBox = ({ targetCount = 0 }: Props) => {
         {Array.from({ length: targetStampLength }).map((_, i) => (
           <Fragment key={i}>
             {i < restTargetCount ? (
-              <LogoFilled css={targetIconCss} />
+              <Logo css={targetIconCss} />
             ) : (
               <LogoEmpty css={targetIconCss} />
             )}
