@@ -3,7 +3,6 @@ import { css } from '@emotion/react'
 import { color } from '../../_common/styles/color'
 
 export const LayoutStyle = css({
-  padding: '0px 25px',
   paddingTop: '41px',
   width: '100%',
   display: 'flex',
@@ -14,6 +13,7 @@ export const LayoutStyle = css({
 })
 
 export const ContentStyle = css({
+  padding: '0px 25px',
   display: 'flex',
   flexDirection: 'column',
   gap: '33px',

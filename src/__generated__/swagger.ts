@@ -44,6 +44,19 @@ export interface AddNextStepForAdventureDto {
   answerType: string
 }
 
+export interface CreateReviewDto {
+  star: number
+}
+
+export interface ReviewCreationResponseDto {
+  review_id: number
+  adventure_id: number
+}
+
+export interface AdventureCountCreationResponseDto {
+  count: number
+}
+
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios'
 import axios from 'axios'
 
@@ -304,12 +317,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags AdventureController
      * @name AdventureControllerFinishAdventure
      * @summary 모험 마무리
-     * @request POST:/api/v1/adventures/{id}/finish
+     * @request PUT:/api/v1/adventures/{id}/finish
      */
-    adventureControllerFinishAdventure: (id: number, params: RequestParams = {}) =>
-      this.request<void, any>({
+    adventureControllerFinishAdventure: (id: string, data: CreateReviewDto, params: RequestParams = {}) =>
+      this.request<ReviewCreationResponseDto, any>({
         path: `/api/v1/adventures/${id}/finish`,
-        method: 'POST',
+        method: 'PUT',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdventureController
+     * @name AdventureControllerGetAdventureCount
+     * @summary adventure 개수 세기
+     * @request GET:/api/v1/adventures/count/{uuid}
+     */
+    adventureControllerGetAdventureCount: (uuid: string, params: RequestParams = {}) =>
+      this.request<AdventureCountCreationResponseDto, any>({
+        path: `/api/v1/adventures/count/${uuid}`,
+        method: 'GET',
+        format: 'json',
         ...params
       })
   }
