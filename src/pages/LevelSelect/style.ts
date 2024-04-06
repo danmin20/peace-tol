@@ -14,7 +14,6 @@ export const LayoutStyle = css`
 export const TextGroup = css`
   display: flex;
   flex-direction: column;
-  gap: 5px;
 
   div {
     :nth-of-type(1) {
@@ -38,7 +37,7 @@ export const TextGroup = css`
 export const ButtonGroup = css`
   display: flex;
   gap: 19px;
-  margin-top: 25px;
+  margin-top: 35px;
   align-items: center;
   justify-content: center;
   button {
