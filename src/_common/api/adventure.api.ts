@@ -65,9 +65,12 @@ export const usePostNextStepMutation = () => {
   return useMutation(postNextStep)
 }
 
-const postFinalStep = async (id: number) => {
+const postFinalStep = async ({ id, body }: AddNextStepForAdventureBody) => {
   const data =
-    await swaggerApi.adventureController.adventureControllerAddFinalStep(id)
+    await swaggerApi.adventureController.adventureControllerAddFinalStep(
+      id,
+      body
+    )
   return data.data
 }
 

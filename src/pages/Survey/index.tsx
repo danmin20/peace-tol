@@ -1,18 +1,30 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Rating } from './components/Rating'
 import { SurveySplash } from './components/SurveySplash'
 import { iconCss, spacingCss, titleCss, wrapperCss } from './style'
+import { usePostFinishAdventureMutation } from '../../_common/api/adventure.api'
 import { Button } from '../../_common/components/Button'
 import { SplashWrapper } from '../../_common/components/SplashWrapper'
 import { Logo } from '../../assets'
 
 export const Survey = () => {
-  const [selected, setSelected] = useState(5)
   const navigate = useNavigate()
+  const location = useLocation()
 
-  const handleNextClick = () => {
+  const [rate, setRate] = useState(5)
+
+  const postFinishAdventureMutation = usePostFinishAdventureMutation()
+
+  const handleNextClick = async () => {
+    const adventureId = location.state?.adventureId
+    if (!adventureId) return
+
+    await postFinishAdventureMutation.mutateAsync({
+      id: adventureId,
+      body: { star: rate }
+    })
     navigate('/')
   }
 
@@ -21,9 +33,13 @@ export const Survey = () => {
       <div css={wrapperCss}>
         <Logo css={iconCss} />
         <h1 css={titleCss}>모험은 어떠셨나요?</h1>
-        <Rating selected={selected} onSelected={setSelected} />
+        <Rating selected={rate} onSelected={setRate} />
         <div css={spacingCss} />
-        <Button onAnimationCompleteClick={handleNextClick} isFullWidth>
+        <Button
+          onAnimationCompleteClick={handleNextClick}
+          isFullWidth
+          isLoading={postFinishAdventureMutation.isLoading}
+        >
           메인으로
         </Button>
       </div>

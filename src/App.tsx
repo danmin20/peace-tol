@@ -4,7 +4,6 @@ import { Layout } from './_common/components/Layout'
 import { Adventure } from './pages/Adventure'
 import { LevelSelect } from './pages/LevelSelect'
 import { Main } from './pages/Main'
-import { Review } from './pages/Review'
 import { Survey } from './pages/Survey'
 
 export const App = () => {
@@ -15,7 +14,6 @@ export const App = () => {
         <Route path="level-select" element={<LevelSelect />} />
         <Route path="adventure/:id" element={<Adventure />} />
         <Route path="survey" element={<Survey />} />
-        <Route path="review" element={<Review />} />
       </Route>
     </Routes>
   )
