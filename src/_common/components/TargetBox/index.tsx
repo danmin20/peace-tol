@@ -1,7 +1,13 @@
 import { Fragment } from 'react'
 
-import { stampCss, wrapperCss, targetIconCss, levelTextCss } from './style'
-import { Logo } from '../../../assets'
+import {
+  levelTextCss,
+  levelWrapperCss,
+  targetBoxCss,
+  targetIconCss
+} from './style'
+import { LogoFilled, LogoEmpty } from '../../../assets'
+import { color } from '../../styles/color'
 
 type Props = {
   /**
@@ -17,20 +23,26 @@ export const TargetBox = ({ targetCount = 0 }: Props) => {
   const restTargetCount = targetCount % targetStampLength
 
   return (
-    <div css={wrapperCss}>
-      {Array.from({ length: targetStampLength }).map((_, i) => (
-        <Fragment key={i}>
-          {i < restTargetCount ? (
-            <Logo css={targetIconCss} />
-          ) : (
-            <div css={stampCss}>
-              {i === targetStampLength - 1 ? (
-                <span css={levelTextCss}>LV. {level}</span>
-              ) : null}
-            </div>
-          )}
-        </Fragment>
-      ))}
-    </div>
+    <>
+      <div css={levelWrapperCss}>
+        <p css={levelTextCss} style={{ color: color.red }}>
+          LV. {level}
+        </p>
+        <p css={levelTextCss} style={{ color: color.gray4 }}>
+          LV. {level + 1}
+        </p>
+      </div>
+      <div css={targetBoxCss}>
+        {Array.from({ length: targetStampLength }).map((_, i) => (
+          <Fragment key={i}>
+            {i < restTargetCount ? (
+              <LogoFilled css={targetIconCss} />
+            ) : (
+              <LogoEmpty css={targetIconCss} />
+            )}
+          </Fragment>
+        ))}
+      </div>
+    </>
   )
 }
