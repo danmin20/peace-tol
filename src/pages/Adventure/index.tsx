@@ -10,6 +10,7 @@ import { AnswerType } from './types/adventure.type'
 import { getContentHtml } from './utils/parse-html'
 import {
   useGetAdventure,
+  usePostFinalStepMutation,
   usePostNextStepMutation
 } from '../../_common/api/adventure.api'
 import { Ballon } from '../../_common/components/Ballon'
@@ -27,6 +28,7 @@ export const Adventure = () => {
   const [isShoot, setIsShoot] = useState<boolean>(false)
 
   const postNextStepMutation = usePostNextStepMutation()
+  const postFinalStepMutation = usePostFinalStepMutation()
 
   const adventureId = location.pathname.split('/adventure/')[1]
   const totalStage =
@@ -66,7 +68,9 @@ export const Adventure = () => {
     setStage(stage + 1)
 
     if (!adventure?.missions || stage === totalStage) {
-      navigate('/survey')
+      navigate('/survey', {
+        state: { adventureId }
+      })
       return
     }
   }
@@ -86,7 +90,13 @@ export const Adventure = () => {
       await refetch()
     }
     if (stage === 6) {
-      // await postFinalStep(adventureId)
+      await postFinalStepMutation.mutateAsync({
+        id: adventureId,
+        body: {
+          userUuid,
+          answerType
+        }
+      })
       await refetch()
     }
     setStage(stage + 1)

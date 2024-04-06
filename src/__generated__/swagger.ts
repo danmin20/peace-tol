@@ -57,6 +57,15 @@ export interface AdventureCountCreationResponseDto {
   count: number
 }
 
+export interface RecentAdventureResponseDto {
+  /** @format date-time */
+  createdAt: string
+  /** @format date-time */
+  endedAt: string
+  difficulty: number
+  review_star: number
+}
+
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios'
 import axios from 'axios'
 
@@ -304,10 +313,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary 모험의 마지막 단계 생성
      * @request PUT:/api/v1/adventures/{id}/final-step
      */
-    adventureControllerAddFinalStep: (id: number, params: RequestParams = {}) =>
+    adventureControllerAddFinalStep: (id: string, data: AddNextStepForAdventureDto, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/adventures/${id}/final-step`,
         method: 'PUT',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
@@ -340,6 +351,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     adventureControllerGetAdventureCount: (uuid: string, params: RequestParams = {}) =>
       this.request<AdventureCountCreationResponseDto, any>({
         path: `/api/v1/adventures/count/${uuid}`,
+        method: 'GET',
+        format: 'json',
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdventureController
+     * @name AdventureControllerGetRecentAdventure
+     * @summary 최근 adventure 순서
+     * @request GET:/api/v1/adventures/recent/{uuid}
+     */
+    adventureControllerGetRecentAdventure: (uuid: string, params: RequestParams = {}) =>
+      this.request<RecentAdventureResponseDto, any>({
+        path: `/api/v1/adventures/recent/${uuid}`,
         method: 'GET',
         format: 'json',
         ...params
