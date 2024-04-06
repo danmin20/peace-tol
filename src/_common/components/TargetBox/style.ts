@@ -2,7 +2,23 @@ import { css } from '@emotion/react'
 
 import { color } from '../../styles/color'
 
-export const wrapperCss = css`
+export const levelWrapperCss = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 0 12px;
+`
+
+export const levelTextCss = css`
+  font-family: GeekbleMalang2;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 27.6px;
+`
+
+export const targetBoxCss = css`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -13,25 +29,7 @@ export const wrapperCss = css`
   background-color: ${color.white};
 `
 
-export const stampCss = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid #bbbbbb;
-`
-
 export const targetIconCss = css`
-  width: 50px;
-  height: 50px;
-`
-
-export const levelTextCss = css`
-  font-family: GeekbleMalang2;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 13.8px;
-  color: ${color.red1};
+  width: 48px;
+  height: 48px;
 `

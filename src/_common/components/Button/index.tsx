@@ -23,6 +23,7 @@ export const Button = ({
   onAnimationCompleteClick,
   onClick,
   children,
+  style,
   ...props
 }: Props) => {
   const [isClicked, setClicked] = useState(false)
@@ -47,7 +48,10 @@ export const Button = ({
         onClick?.(e)
       }}
       css={isFullWidth ? FullWidthButtonStyle : ButtonStyle}
-      style={{ backgroundColor: disabled ? color.gray3 : backgroundColor }}
+      style={{
+        backgroundColor: disabled ? color.gray3 : backgroundColor,
+        ...style
+      }}
       disabled={disabled}
       {...props}
     >
