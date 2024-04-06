@@ -102,8 +102,6 @@ export const Adventure = () => {
 
   const contentHtml = getContentHtml(adventure?.missions[stage]?.body ?? '')
 
-  const defaultImageHeight = `${(window.innerWidth * 239) / 390}px`
-
   return (
     <SplashWrapper splash={<AdventureSplash />}>
       <Header
@@ -120,11 +118,15 @@ export const Adventure = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -30, opacity: 0 }}
             transition={{ duration: 0.3 }}
+            style={{ width: '100%' }}
           >
             <img
               src={adventure?.missions[stage].imagePath}
-              width="100%"
-              height={defaultImageHeight}
+              style={{
+                aspectRatio: '390 / 239',
+                width: '100%',
+                height: 'auto'
+              }}
             />
           </motion.div>
 

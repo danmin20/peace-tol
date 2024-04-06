@@ -2,13 +2,16 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { logoCss, titleCss, wrapperCss, clipboard } from './style'
+import { useGetUserAdventureCount } from '../../_common/api/adventure.api'
 import { Button } from '../../_common/components/Button'
 import { TargetBox } from '../../_common/components/TargetBox'
 import { color } from '../../_common/styles/color'
+import { getUser } from '../../_common/utils/user'
 import { Logo, Link } from '../../assets'
 
 export const Finish = () => {
-  const prevTargetCount = 7 //FIXME: API로 받아오기
+  const uuid = getUser()!
+  const { data } = useGetUserAdventureCount(uuid)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -34,8 +37,7 @@ export const Finish = () => {
         <br />
         특별한 시간이었길 바라요.
       </h1>
-      <TargetBox targetCount={prevTargetCount} />
-
+      <TargetBox targetCount={data?.count} />
       <div
         css={clipboard}
         onClick={handleCopyClipBoard}
@@ -49,7 +51,14 @@ export const Finish = () => {
         </div>
       </div>
 
-      <Button onClick={() => navigate('/')} isFullWidth>
+      <Button
+        onClick={() =>
+          navigate('/', {
+            state: { isSplash: false }
+          })
+        }
+        isFullWidth
+      >
         메인으로 가기
       </Button>
     </div>
