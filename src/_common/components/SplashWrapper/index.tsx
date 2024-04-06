@@ -6,6 +6,7 @@ type Props = {
   active?: boolean
   splash: React.ReactNode
   timeout?: number
+  onTimeout?: () => void
   children: React.ReactNode
   style?: React.CSSProperties
   css?: Interpolation<Theme>
@@ -15,6 +16,7 @@ export const SplashWrapper = ({
   active = true,
   splash,
   timeout = 2000,
+  onTimeout,
   children,
   style,
   css,
@@ -23,12 +25,15 @@ export const SplashWrapper = ({
   const [show, setShow] = useState(active)
 
   useEffect(() => {
+    if (!active) return
+    setShow(active)
     const timerId = setTimeout(() => {
       setShow(false)
+      onTimeout?.()
     }, timeout)
 
     return () => clearTimeout(timerId)
-  }, [])
+  }, [active])
 
   return (
     <AnimatePresence mode="wait" {...props}>

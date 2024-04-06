@@ -25,7 +25,12 @@ export const Main = () => {
   const { data } = useGetUserAdventureList(uuid, { enabled: !!uuid })
 
   return (
-    <SplashWrapper timeout={4000} splash={<Splash />}>
+    <SplashWrapper
+      timeout={4000}
+      onTimeout={() => localStorage.setItem('isFirstVisit', 'false')}
+      active={localStorage.getItem('isFirstVisit') === 'true'}
+      splash={<Splash />}
+    >
       <div css={wrapperCss}>
         <Logo css={logoCss} />
         <div css={targetBoxCss}>
