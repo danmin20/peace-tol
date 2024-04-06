@@ -47,6 +47,7 @@ export const ButtonStyle = css({
   fontSize: '20px',
   fontWeight: 600,
   backgroundColor: color.white,
+  color: color.black,
 
   '&:active': {
     border: '2px solid rgba(255, 90, 90, 1)',
