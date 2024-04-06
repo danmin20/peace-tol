@@ -13,6 +13,7 @@ export const LayoutStyle = css({
 })
 
 export const ContentStyle = css({
+  marginTop: '10px',
   padding: '0px 25px',
   display: 'flex',
   flexDirection: 'column',

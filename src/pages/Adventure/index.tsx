@@ -119,7 +119,11 @@ export const Adventure = () => {
             exit={{ y: -30, opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <img src={adventure?.missions[stage].imagePath} width="100%" />
+            {adventure?.missions[stage].imagePath ? (
+              <img src={adventure?.missions[stage].imagePath} width="100%" />
+            ) : (
+              <div style={{ aspectRatio: '390/239', width: '100%' }} />
+            )}
           </motion.div>
 
           <div css={ContentStyle}>

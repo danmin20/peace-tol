@@ -90,13 +90,15 @@ export const Question = ({ onConfirm }: Props) => {
       <div css={QuestionStyle}>{questions[questionStage].question}</div>
       <div css={Buttons}>
         {questions[questionStage].answers.map((answer) => (
-          <button
-            key={answer.value}
-            css={ButtonStyle}
-            onClick={() => handleConfirm(answer.value)}
-          >
-            {answer.content}
-          </button>
+          <motion.button whileTap={{ scale: 0.96 }}>
+            <button
+              key={answer.value}
+              css={ButtonStyle}
+              onClick={() => handleConfirm(answer.value)}
+            >
+              {answer.content}
+            </button>
+          </motion.button>
         ))}
       </div>
     </div>
@@ -145,13 +147,15 @@ export const Question = ({ onConfirm }: Props) => {
           ))}
         </Ballon>
 
-        <button
-          key={answer}
-          css={ButtonStyle}
-          onClick={() => onConfirm(answer)}
-        >
-          들어왔어요!
-        </button>
+        <motion.button whileTap={{ scale: 0.96 }}>
+          <button
+            key={answer}
+            css={ButtonStyle}
+            onClick={() => onConfirm(answer)}
+          >
+            들어왔어요!
+          </button>
+        </motion.button>
       </div>
     </div>
   )
