@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Progress } from './components/Progress'
+import { Question } from './components/Question'
 import {
   Buttons,
   ContentStyle,
@@ -32,11 +33,11 @@ export const Route = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const [stage, setStage] = useState<number>(0)
+  const [stage, setStage] = useState<number>(1)
   const [isPaused, setIsPaused] = useState<boolean>(false)
 
   const handleBack = () => {
-    if (stage === 0) {
+    if (stage === 1) {
       navigate('/level-select', {
         state: { level: location.state?.level ?? undefined }
       })
@@ -46,7 +47,7 @@ export const Route = () => {
   }
 
   const handleNext = () => {
-    if (stage === dummy.length - 1) {
+    if (stage === dummy.length) {
       navigate('/survey')
       return
     }
@@ -56,33 +57,39 @@ export const Route = () => {
   const contentHtml = parser.parseFromString(dummy[stage].content, 'text/html')
     .body.innerHTML
 
+  const isQuestionTime = stage === 5 || stage === 8 || stage === 10
+
   return (
     <>
-      <div css={LayoutStyle}>
-        <Header
-          handleBack={handleBack}
-          extra={<Progress stage={stage} total={dummy.length} />}
-        />
-        {dummy[stage].imagePath ? (
-          <img src={dummy[stage].imagePath} />
-        ) : (
-          <div css={EmptyStyle} />
-        )}
-
-        <div css={ContentStyle}>
-          <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
-          <Ballon>{dummy[stage].ballon}</Ballon>
-        </div>
-
-        <div css={Buttons}>
-          {isPaused ? (
-            <div css={EmptyIcon} />
+      {isQuestionTime ? (
+        <Question stage={stage} />
+      ) : (
+        <div css={LayoutStyle}>
+          <Header
+            handleBack={handleBack}
+            extra={<Progress stage={stage} total={dummy.length} />}
+          />
+          {dummy[stage].imagePath ? (
+            <img src={dummy[stage].imagePath} />
           ) : (
-            <Pause onClick={() => setIsPaused(true)} />
+            <div css={EmptyStyle} />
           )}
-          <Skip onClick={handleNext} />
+
+          <div css={ContentStyle}>
+            <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+            <Ballon>{dummy[stage].ballon}</Ballon>
+          </div>
+
+          <div css={Buttons}>
+            {isPaused ? (
+              <div css={EmptyIcon} />
+            ) : (
+              <Pause onClick={() => setIsPaused(true)} />
+            )}
+            <Skip onClick={handleNext} />
+          </div>
         </div>
-      </div>
+      )}
 
       {isPaused && (
         <div css={DimmedStyle}>

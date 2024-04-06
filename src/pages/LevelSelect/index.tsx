@@ -23,9 +23,6 @@ type LevelType = {
   img: JSX.Element
 }
 
-// easy, normal, hard -> 4개가 지나고 나서 요청
-// normal, hard -> 7개가 지나고 나서 요청
-
 const levels: LevelType[] = [
   { level: 1, stage: 5, label: 'easy', type: 'tertiary', img: <Gun1 /> },
   { level: 2, stage: 8, label: 'normal', type: 'secondary', img: <Gun2 /> },
