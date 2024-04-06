@@ -1,7 +1,14 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
-import { logoCss, subTitleCss, titleCss, wrapperCss } from './style'
+import {
+  logoCss,
+  peaceTolTextCss,
+  subTitleCss,
+  titleCss,
+  wrapperCss
+} from './style'
+import { LogoWhite } from '../../../assets'
 
 export const Splash = () => {
   const [show, setShow] = useState(true)
@@ -23,9 +30,10 @@ export const Splash = () => {
           exit={{ opacity: 0 }}
           css={wrapperCss}
         >
-          <div css={logoCss} />
+          <p css={peaceTolTextCss}>‘Peace’ -tol</p>
+          <LogoWhite css={logoCss} />
           <p css={titleCss}>피스톨</p>
-          <p css={subTitleCss}>PeaceTol</p>
+          <p css={subTitleCss}>— 평화로움을 새로이 깨다</p>
         </motion.div>
       )}
     </AnimatePresence>

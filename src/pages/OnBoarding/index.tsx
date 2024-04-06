@@ -6,7 +6,7 @@ export const OnBoarding = () => {
     <>
       <Splash />
       <div>온보딩 페이지</div>
-      <Button content="시작하기" isFullWidth />
+      <Button isFullWidth>시작하기</Button>
     </>
   )
 }

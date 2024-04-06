@@ -8,7 +8,7 @@ import {
   titleCss,
   wrapperCss
 } from './style'
-import { Next } from '../../assets'
+import { LogoBlack, Next } from '../../assets'
 
 export const Review = () => {
   const navigate = useNavigate()
@@ -19,7 +19,7 @@ export const Review = () => {
 
   return (
     <div css={wrapperCss}>
-      <div css={iconCss} />
+      <LogoBlack css={iconCss} />
       <h1 css={titleCss}>
         다른 분들을 위해
         <br />

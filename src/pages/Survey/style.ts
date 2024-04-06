@@ -12,7 +12,6 @@ export const wrapperCss = css`
 export const iconCss = css`
   width: 75px;
   height: 75px;
-  background-color: grey;
   margin-top: 100px;
   margin-bottom: 50px;
 `

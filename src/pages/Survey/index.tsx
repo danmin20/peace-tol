@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Rating } from './components/Rating'
 import { iconCss, nextIconCss, titleCss, wrapperCss } from './style'
-import { Next } from '../../assets'
+import { Logo, Next } from '../../assets'
 
 export const Survey = () => {
   const [selected, setSelected] = useState(5)
@@ -15,7 +15,7 @@ export const Survey = () => {
 
   return (
     <div css={wrapperCss}>
-      <div css={iconCss} />
+      <Logo css={iconCss} />
       <h1 css={titleCss}>모험은 어떠셨나요?</h1>
       <Rating selected={selected} onSelected={setSelected} />
       <Next css={nextIconCss} onClick={handleNextClick} />

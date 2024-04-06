@@ -5,6 +5,11 @@
   src: url('./assets/fonts/GeekbleMalang2WOFF.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'neurimboGothicRegular2';
+  src: url('./assets/fonts/neurimboGothicRegular_2.otf') format('opentype');
+}
+
 :root {
   font-family:
     'Pretendard Variable',

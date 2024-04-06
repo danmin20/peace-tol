@@ -16,7 +16,6 @@ export const iconCss = css`
   height: 75px;
   margin-top: 100px;
   margin-bottom: 34px;
-  background-color: grey;
 `
 
 export const titleCss = css`
