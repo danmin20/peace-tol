@@ -4,29 +4,31 @@ import { color } from '../../styles/color'
 type Props = {
   isFullWidth?: boolean
   disabled?: boolean
-  type?: 'primary' | 'secondary' | 'tertiary'
-  content: string
-}
+  colorType?: 'primary' | 'secondary' | 'tertiary'
+  children?: React.ReactNode
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 export const Button = ({
   isFullWidth = false,
   disabled = false,
-  type = 'primary',
-  content
+  colorType = 'primary',
+  children,
+  ...props
 }: Props) => {
   const backgroundColor =
-    type === 'primary'
+    colorType === 'primary'
       ? color.red
-      : type === 'secondary'
+      : colorType === 'secondary'
         ? color.red1
         : color.red2
 
   return (
     <button
       css={isFullWidth ? FullWidthButtonStyle : ButtonStyle}
-      style={{ backgroundColor }}
+      style={{ backgroundColor: disabled ? color.gray3 : backgroundColor }}
+      {...props}
     >
-      {content}
+      {children}
     </button>
   )
 }

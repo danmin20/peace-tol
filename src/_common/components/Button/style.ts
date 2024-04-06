@@ -14,12 +14,9 @@ export const ButtonStyle = css({
   fontSize: '16px'
 })
 
-export const FullWidthButtonStyle = css(
-  {
-    width: '100%',
-    height: '58px',
-    fontWeight: 700,
-    fontSize: '18px'
-  },
-  ButtonStyle
-)
+export const FullWidthButtonStyle = css(ButtonStyle, {
+  width: '100%',
+  height: '58px',
+  fontWeight: 700,
+  fontSize: '18px'
+})
