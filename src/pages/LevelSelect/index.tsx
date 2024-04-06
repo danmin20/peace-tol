@@ -130,9 +130,8 @@ export const LevelSelect = () => {
         <Button
           disabled={selectedLevel === undefined}
           isFullWidth
-          // onAnimationCompleteClick={createAdventure}
+          onAnimationCompleteClick={createAdventure}
           isLoading={postAdventureMutation.isLoading}
-          onClick={createAdventure}
         >
           선택 완료!
         </Button>
