@@ -13,6 +13,7 @@ export const Progress = ({ total, stage }: Props) => {
       <motion.div
         initial={{ width: 0 }}
         animate={{ width: `${(stage / total) * 100}%` }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
         css={Bar}
       />
     </div>
