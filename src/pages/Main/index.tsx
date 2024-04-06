@@ -25,7 +25,7 @@ export const Main = () => {
   const { data } = useGetUserAdventureList(uuid, { enabled: !!uuid })
 
   return (
-    <SplashWrapper timeout={100000} splash={<Splash />}>
+    <SplashWrapper timeout={4000} splash={<Splash />}>
       <div css={wrapperCss}>
         <Logo css={logoCss} />
         <div css={targetBoxCss}>
