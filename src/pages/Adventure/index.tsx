@@ -1,4 +1,4 @@
-import { motion, cubicBezier } from 'framer-motion'
+import { motion, cubicBezier, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -56,6 +56,7 @@ export const Adventure = () => {
 
   const handleNext = () => {
     console.log('handleNext')
+    setIsShoot(false)
     const isQuestionStage = stage === 3 || stage === 6
     if (isQuestionStage) {
       setIsQuestionTime(true)
@@ -156,28 +157,33 @@ export const Adventure = () => {
                 ))}
             </Ballon>
           </div>
-
-          <motion.div
-            whileTap={{ scale: 0.9 }}
-            style={{
-              position: 'absolute',
-              bottom: '136px'
-            }}
-          >
-            <Bullseye onClick={() => setIsShoot(true)} />
-          </motion.div>
-          {isShoot && (
-            <motion.div
-              whileTap={{ scale: 0.9 }}
-              style={{
-                position: 'absolute',
-                bottom: '118px'
-              }}
-              onAnimationComplete={handleNext}
-            >
-              <LogoFilled />
-            </motion.div>
-          )}
+          <AnimatePresence>
+            {isShoot ? (
+              <motion.div
+                key="logo"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: [0, 1, 0], opacity: [0, 1, 0] }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{
+                  duration: 0.7,
+                  ease: cubicBezier(0.34, 1.56, 0.64, 1)
+                }}
+                onAnimationComplete={handleNext}
+                style={{ position: 'absolute', bottom: '118px' }}
+              >
+                <LogoFilled />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="bullseye"
+                whileTap={{ scale: 0.9 }}
+                style={{ position: 'absolute', bottom: '136px' }}
+                onClick={() => setIsShoot(true)}
+              >
+                <Bullseye />
+              </motion.div>
+            )}
+          </AnimatePresence>
           {stage === 0 && (
             <div css={BullseyeText}>
               해당 단계를 완료하면 과녁을 눌러주세요!
