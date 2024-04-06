@@ -79,7 +79,7 @@ export const Route = () => {
   }, [isPaused])
 
   return (
-    <SplashWrapper active={false} splash={<RouteSplash />}>
+    <SplashWrapper splash={<RouteSplash />}>
       {isQuestionTime ? (
         <Question stage={stage} setIsQuestionTime={setIsQuestionTime} />
       ) : (
@@ -88,11 +88,15 @@ export const Route = () => {
             handleBack={handleBack}
             extra={<Progress stage={stage} total={dummy.length} />}
           />
-          {dummy[stage - 1].imagePath ? (
+          <motion.div
+            key={stage}
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -30, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <img src={dummy[stage - 1].imagePath} />
-          ) : (
-            <div css={EmptyStyle} />
-          )}
+          </motion.div>
 
           <div css={ContentStyle}>
             <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
