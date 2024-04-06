@@ -1,8 +1,5 @@
-import { css } from '@emotion/react'
+import { Layout } from './_common/components/Layout'
 
 export const App = () => {
-  return <div css={containerCss}>App</div>
+  return <Layout>App</Layout>
 }
-const containerCss = css({
-  backgroundColor: 'red'
-})
