@@ -1,4 +1,5 @@
 import { HeaderStyle } from './style'
+import { Back } from '../../../assets'
 
 type Props = {
   handleBack: () => void
@@ -7,7 +8,9 @@ type Props = {
 export const Header = ({ handleBack }: Props) => {
   return (
     <div css={HeaderStyle}>
-      <div onClick={handleBack}>{'<'}</div>
+      <div onClick={handleBack}>
+        <Back />
+      </div>
     </div>
   )
 }

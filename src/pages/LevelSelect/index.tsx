@@ -1,20 +1,28 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { ButtonGroup, FinishButtonStyle, LayoutStyle, TextGroup } from './style'
+import {
+  ButtonGroup,
+  FinishButtonStyle,
+  LayoutStyle,
+  StageInfo,
+  TextGroup
+} from './style'
 import { Button } from '../../_common/components/Button'
 import { Header } from '../../_common/components/Header'
+import { Gun1, Gun2, Gun3 } from '../../assets'
 
 type LevelType = {
   level: number
-  time: string
+  stage: number
   type: 'primary' | 'secondary' | 'tertiary'
+  img: JSX.Element
 }
 
 const levels: LevelType[] = [
-  { level: 1, time: '1시간', type: 'primary' },
-  { level: 2, time: '2시간', type: 'secondary' },
-  { level: 3, time: '3시간', type: 'tertiary' }
+  { level: 1, stage: 5, type: 'tertiary', img: <Gun1 /> },
+  { level: 2, stage: 8, type: 'secondary', img: <Gun2 /> },
+  { level: 3, stage: 10, type: 'primary', img: <Gun3 /> }
 ]
 
 const levelMap = levels.reduce(
@@ -36,11 +44,9 @@ export const LevelCheck = () => {
       <div css={LayoutStyle}>
         <div css={TextGroup}>
           <div>
-            여정 <span>난이도</span>를 골라봐요
+            모험 <span>난이도</span>를 골라봐요
           </div>
-          <div>
-            {level ? `평균적으로 ${levelMap[level].time} 정도 소요돼요` : ''}
-          </div>
+          <div>평균적으로 2시간에서 4시간 정도 소요돼요</div>
         </div>
 
         <div css={ButtonGroup}>
@@ -54,6 +60,13 @@ export const LevelCheck = () => {
             </Button>
           ))}
         </div>
+
+        {level && (
+          <div css={StageInfo}>
+            <div>{levelMap[level].stage}단계로 이루어져 있어요.</div>
+            {levelMap[level].img}
+          </div>
+        )}
 
         <div css={FinishButtonStyle}>
           <Button disabled={level === undefined} isFullWidth>

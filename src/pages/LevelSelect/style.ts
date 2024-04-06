@@ -6,14 +6,14 @@ export const LayoutStyle = css({
   padding: '0px 35px',
   paddingTop: '39px',
   width: '100%',
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
+  lineHeight: '32px'
 })
 
 export const TextGroup = css({
   display: 'flex',
   flexDirection: 'column',
   gap: '5px',
-  lineHeight: '32px',
 
   div: {
     '&:nth-child(1)': {
@@ -37,6 +37,17 @@ export const ButtonGroup = css({
   marginTop: '28px',
   alignItems: 'center',
   justifyContent: 'center'
+})
+
+export const StageInfo = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '37px',
+  alignItems: 'center',
+  fontSize: '16px',
+  fontWeight: 600,
+  color: color.red,
+  marginTop: '43px'
 })
 
 export const FinishButtonStyle = css({
