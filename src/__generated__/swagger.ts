@@ -14,11 +14,6 @@ export interface CreateUserDto {
   uuid: string
 }
 
-export interface CreateAdventureDto {
-  difficulty: number
-  userUuid: string
-}
-
 export interface Mission {
   body: string
   quote: string
@@ -33,6 +28,15 @@ export interface AdventureResponseDto {
   endedAt: string
   difficulty: number
   missions: Mission[]
+}
+
+export interface CreateAdventureDto {
+  difficulty: number
+  userUuid: string
+}
+
+export interface AdventureCreationResponseDto {
+  id: number
 }
 
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios'
@@ -227,16 +231,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags AdventureController
-     * @name AdventureControllerCreate
-     * @summary 모험 생성
-     * @request POST:/api/v1/adventures
+     * @name AdventureControllerGetById
+     * @request GET:/api/v1/adventures/{id}
      */
-    adventureControllerCreate: (data: CreateAdventureDto, params: RequestParams = {}) =>
+    adventureControllerGetById: (id: string, params: RequestParams = {}) =>
       this.request<AdventureResponseDto, any>({
-        path: `/api/v1/adventures`,
-        method: 'POST',
-        body: data,
-        type: ContentType.Json,
+        path: `/api/v1/adventures/${id}`,
+        method: 'GET',
         format: 'json',
         ...params
       }),
@@ -245,14 +246,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags AdventureController
-     * @name AdventureControllerAddNextStep
-     * @summary 모험의 다음 단계 생성
-     * @request PUT:/api/v1/adventures/{id}/next-step
+     * @name AdventureControllerCreate
+     * @summary 모험 생성
+     * @request POST:/api/v1/adventures
      */
-    adventureControllerAddNextStep: (id: number, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/api/v1/adventures/${id}/next-step`,
-        method: 'PUT',
+    adventureControllerCreate: (data: CreateAdventureDto, params: RequestParams = {}) =>
+      this.request<AdventureCreationResponseDto, any>({
+        path: `/api/v1/adventures`,
+        method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
         ...params
       }),
 

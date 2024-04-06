@@ -11,6 +11,7 @@ import {
   checkIcon,
   wrapperButton
 } from './style'
+import { postAdventure } from '../../_common/api/adventure.api'
 import { postUser } from '../../_common/api/user.api'
 import { Button } from '../../_common/components/Button'
 // import { Header } from '../../_common/components/Header'
@@ -54,6 +55,20 @@ export const LevelSelect = () => {
       const data = await postUser()
       setUser(data.uuid)
     }
+  }
+
+  const createAdventure = async () => {
+    const uuid = getUser()
+    if (uuid === null || selectedLevel === undefined) return
+
+    const data = await postAdventure({
+      userUuid: uuid,
+      difficulty: selectedLevel
+    })
+
+    navigate('/route', {
+      state: { level: selectedLevel, adventureId: data.id }
+    })
   }
 
   useEffect(() => {
@@ -124,9 +139,7 @@ export const LevelSelect = () => {
           <Button
             disabled={selectedLevel === undefined}
             isFullWidth
-            onAnimationCompleteClick={() =>
-              navigate('/route', { state: { level: selectedLevel } })
-            }
+            onAnimationCompleteClick={createAdventure}
           >
             선택 완료!
           </Button>
