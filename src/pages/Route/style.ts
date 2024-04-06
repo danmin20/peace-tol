@@ -24,7 +24,7 @@ export const ContentStyle = css({
     fontWeight: 700,
     lineHeight: '44px',
     textAlign: 'center',
-
+    marginTop: '40px',
     span: {
       color: color.red
     }
