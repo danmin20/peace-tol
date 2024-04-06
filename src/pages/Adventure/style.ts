@@ -37,11 +37,3 @@ export const BullseyeText = css({
   color: color.red,
   bottom: '82px'
 })
-
-export const EndButton = css({
-  fontSize: '14px',
-  lineHeight: '23.24px',
-  position: 'absolute',
-  color: color.gray3,
-  bottom: '44px'
-})

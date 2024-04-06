@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { AdventureSplash } from './components/AdventureSplash'
 import { Progress } from './components/Progress'
 import { Question } from './components/Question'
-import { BullseyeText, ContentStyle, EndButton, LayoutStyle } from './style'
+import { BullseyeText, ContentStyle, LayoutStyle } from './style'
 import { AnswerType } from './types/adventure.type'
 import { getContentHtml } from './utils/parse-html'
 import {
@@ -185,7 +185,6 @@ export const Adventure = () => {
               해당 단계를 완료하면 과녁을 눌러주세요!
             </div>
           )}
-          {/* <div css={EndButton}>모험 포기</div> */}
         </div>
       )}
     </SplashWrapper>
