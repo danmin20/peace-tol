@@ -2,11 +2,9 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Rating } from './components/Rating'
-import { SurveySplash } from './components/SurveySplash'
 import { iconCss, spacingCss, titleCss, wrapperCss } from './style'
 import { usePostFinishAdventureMutation } from '../../_common/api/adventure.api'
 import { Button } from '../../_common/components/Button'
-import { SplashWrapper } from '../../_common/components/SplashWrapper'
 import { Logo } from '../../assets'
 
 export const Survey = () => {
@@ -25,24 +23,24 @@ export const Survey = () => {
       id: adventureId,
       body: { star: rate }
     })
-    navigate('/')
+    navigate('/finish', {
+      state: { adventureId }
+    })
   }
 
   return (
-    <SplashWrapper splash={<SurveySplash />}>
-      <div css={wrapperCss}>
-        <Logo css={iconCss} />
-        <h1 css={titleCss}>모험은 어떠셨나요?</h1>
-        <Rating selected={rate} onSelected={setRate} />
-        <div css={spacingCss} />
-        <Button
-          onAnimationCompleteClick={handleNextClick}
-          isFullWidth
-          isLoading={postFinishAdventureMutation.isLoading}
-        >
-          메인으로
-        </Button>
-      </div>
-    </SplashWrapper>
+    <div css={wrapperCss}>
+      <Logo css={iconCss} />
+      <h1 css={titleCss}>모험은 어떠셨나요?</h1>
+      <Rating selected={rate} onSelected={setRate} />
+      <div css={spacingCss} />
+      <Button
+        onAnimationCompleteClick={handleNextClick}
+        isFullWidth
+        isLoading={postFinishAdventureMutation.isLoading}
+      >
+        완료!
+      </Button>
+    </div>
   )
 }

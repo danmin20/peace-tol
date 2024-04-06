@@ -17,3 +17,5 @@ export { default as LogoEmpty } from './logo_empty.svg?react'
 
 export { default as Star } from './star.svg?react'
 export { default as StarFilled } from './star_filled.svg?react'
+
+export { default as Link } from './link.svg?react'

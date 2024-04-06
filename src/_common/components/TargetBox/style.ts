@@ -13,23 +13,24 @@ export const levelWrapperCss = css`
 
 export const levelTextCss = css`
   font-family: GeekbleMalang2;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
-  line-height: 27.6px;
+  line-height: 25px;
 `
 
 export const targetBoxCss = css`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 96px;
-  padding: 24px 26px;
+  height: 90px;
+  padding: 0 26px;
   border-radius: 16px;
   box-shadow: 0px 5px 30px 0px rgba(97, 97, 97, 0.2);
   background-color: ${color.white};
 `
 
 export const targetIconCss = css`
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
 `

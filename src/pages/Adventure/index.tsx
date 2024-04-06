@@ -57,8 +57,10 @@ export const Adventure = () => {
   }
 
   const handleNext = () => {
+    console.log(adventure?.endedAt)
     setIsShoot(false)
-    const isQuestionStage = stage === 3 || stage === 6
+    const isQuestionStage = !adventure?.endedAt && (stage === 3 || stage === 6)
+
     if (isQuestionStage) {
       setIsQuestionTime(true)
       return
