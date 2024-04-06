@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import { RecordListRow } from './components/RecordListRow.'
 import {
   logoCss,
@@ -51,6 +53,8 @@ const dummy = [
 ] as const
 
 export const Main = () => {
+  const navigate = useNavigate()
+
   return (
     <SplashWrapper splash={<Splash />}>
       <div css={wrapperCss}>
@@ -66,7 +70,11 @@ export const Main = () => {
             <RecordListRow key={index} {...record} />
           ))}
         </div>
-        <Button style={{ height: '80px' }} isFullWidth>
+        <Button
+          onClick={() => navigate('/level-select')}
+          style={{ height: '80px' }}
+          isFullWidth
+        >
           나만의 모험 떠나기
         </Button>
       </div>
