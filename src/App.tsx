@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 
 import { Layout } from './_common/components/Layout'
-import { LevelSelect } from './pages/LevelSelect'
 // import { Main } from './pages/Main'
 // import { OnBoarding } from './pages/OnBoarding'
+import { LevelSelect } from './pages/LevelSelect'
 import { Review } from './pages/Review'
 import { Route as RoutePage } from './pages/Route'
 import { Survey } from './pages/Survey'

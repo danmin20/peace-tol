@@ -1,10 +1,12 @@
+import { useState } from 'react'
+
 import { ButtonStyle, Buttons, QStyle, QuestionStyle, Wrapper } from './style'
 
-const questions: Record<
-  number,
-  { question: string; answers?: { value: string; content: string }[] }
-> = {
-  3: {
+const questions: {
+  question: string
+  answers: { value: string; content: string }[]
+}[] = [
+  {
     question: '혹시 지금 상태는 어때요?',
     answers: [
       {
@@ -21,7 +23,7 @@ const questions: Record<
       }
     ]
   },
-  6: {
+  {
     question: '주위에 무엇이 있나요?',
     answers: [
       {
@@ -37,34 +39,35 @@ const questions: Record<
         content: '코인노래방'
       }
     ]
-  },
-  8: {
-    question: '지금 한 사람을 생각해보세요'
   }
-}
+]
 
 type Props = {
-  stage: number
-  setStage: (stage: number) => void
-  setIsQuestionTime: (isQuestionTime: boolean) => void
+  onConfirm: () => void
 }
 
-export const Question = ({ stage, setStage, setIsQuestionTime }: Props) => {
-  const content = questions[stage]
+export const Question = ({ onConfirm }: Props) => {
+  const [questionStage, setQuestionStage] = useState<number>(0)
 
-  const handleConfirm = async () => {
-    // TODO: api handling
-    setStage(stage + 1)
-    setIsQuestionTime(false)
+  const handleConfirm = async (value: string) => {
+    if (value === 'FINE') {
+      setQuestionStage(1)
+      return
+    }
+    onConfirm()
   }
 
   return (
     <div css={Wrapper}>
       <div css={QStyle}>Q</div>
-      <div css={QuestionStyle}>{content.question}</div>
+      <div css={QuestionStyle}>{questions[questionStage].question}</div>
       <div css={Buttons}>
-        {content.answers?.map((answer) => (
-          <button key={answer.value} css={ButtonStyle} onClick={handleConfirm}>
+        {questions[questionStage].answers.map((answer) => (
+          <button
+            key={answer.value}
+            css={ButtonStyle}
+            onClick={() => handleConfirm(answer.value)}
+          >
             {answer.content}
           </button>
         ))}

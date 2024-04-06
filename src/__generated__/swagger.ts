@@ -14,6 +14,31 @@ export interface CreateUserDto {
   uuid: string
 }
 
+export interface Mission {
+  body: string
+  quote: string
+  imagePath: string
+}
+
+export interface AdventureResponseDto {
+  id: number
+  /** @format date-time */
+  createdAt: string
+  /** @format date-time */
+  endedAt: string
+  difficulty: number
+  missions: Mission[]
+}
+
+export interface CreateAdventureDto {
+  difficulty: number
+  userUuid: string
+}
+
+export interface AdventureCreationResponseDto {
+  id: number
+}
+
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios'
 import axios from 'axios'
 
@@ -198,6 +223,70 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/users`,
         method: 'POST',
         format: 'json',
+        ...params
+      })
+  }
+  adventureController = {
+    /**
+     * No description
+     *
+     * @tags AdventureController
+     * @name AdventureControllerGetById
+     * @request GET:/api/v1/adventures/{id}
+     */
+    adventureControllerGetById: (id: string, params: RequestParams = {}) =>
+      this.request<AdventureResponseDto, any>({
+        path: `/api/v1/adventures/${id}`,
+        method: 'GET',
+        format: 'json',
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdventureController
+     * @name AdventureControllerCreate
+     * @summary 모험 생성
+     * @request POST:/api/v1/adventures
+     */
+    adventureControllerCreate: (data: CreateAdventureDto, params: RequestParams = {}) =>
+      this.request<AdventureCreationResponseDto, any>({
+        path: `/api/v1/adventures`,
+        method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdventureController
+     * @name AdventureControllerAddFinalStep
+     * @summary 모험의 마지막 단계 생성
+     * @request PUT:/api/v1/adventures/{id}/final-step
+     */
+    adventureControllerAddFinalStep: (id: number, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/v1/adventures/${id}/final-step`,
+        method: 'PUT',
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdventureController
+     * @name AdventureControllerFinishAdventure
+     * @summary 모험 마무리
+     * @request POST:/api/v1/adventures/{id}/finish
+     */
+    adventureControllerFinishAdventure: (id: number, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/v1/adventures/${id}/finish`,
+        method: 'POST',
         ...params
       })
   }
