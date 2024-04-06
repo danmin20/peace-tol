@@ -1,33 +1,26 @@
-import { motion, AnimatePresence, useAnimate, cubicBezier } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { motion, cubicBezier } from 'framer-motion'
+import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Progress } from './components/Progress'
 import { Question } from './components/Question'
 import { RouteSplash } from './components/RouteSplash'
-import {
-  Buttons,
-  ContentStyle,
-  DimmedStyle,
-  EmptyIcon,
-  LayoutStyle
-} from './style'
+import { BullseyeText, ContentStyle, EndButton, LayoutStyle } from './style'
 import { useGetAdventure } from '../../_common/api/adventure.api'
 import { Ballon } from '../../_common/components/Ballon'
 import { Header } from '../../_common/components/Header'
 import { SplashWrapper } from '../../_common/components/SplashWrapper'
-import { Pause, Play, Skip } from '../../assets'
+import { Bullseye, LogoFilled } from '../../assets'
 
 const parser = new DOMParser()
 
 export const Route = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const [scope, animate] = useAnimate()
 
   const [stage, setStage] = useState<number>(0)
-  const [isPaused, setIsPaused] = useState<boolean>(false)
   const [isQuestionTime, setIsQuestionTime] = useState<boolean>(false)
+  const [isShoot, setIsShoot] = useState<boolean>(false)
 
   const {
     data: adventure,
@@ -83,15 +76,6 @@ export const Route = () => {
     adventure?.missions[stage]?.body ?? '',
     'text/html'
   ).body.innerHTML
-
-  useEffect(() => {
-    if (scope.current == null) return
-    animate(
-      scope.current,
-      { opacity: isPaused ? 0 : 1 },
-      { duration: 0.3, ease: 'easeOut' }
-    )
-  }, [isPaused])
 
   return (
     <SplashWrapper splash={<RouteSplash />} loading={isLoading}>
@@ -153,40 +137,35 @@ export const Route = () => {
             </Ballon>
           </div>
 
-          <div css={Buttons}>
-            <motion.div ref={scope} whileTap={{ scale: 0.9 }}>
-              <Pause onClick={() => setIsPaused(true)} />
+          <motion.div
+            whileTap={{ scale: 0.9 }}
+            style={{
+              position: 'absolute',
+              bottom: '136px'
+            }}
+          >
+            <Bullseye onClick={() => setIsShoot(true)} />
+          </motion.div>
+          {isShoot && (
+            <motion.div
+              whileTap={{ scale: 0.9 }}
+              style={{
+                position: 'absolute',
+                bottom: '118px'
+              }}
+              onAnimationComplete={handleNext}
+            >
+              <LogoFilled />
             </motion.div>
-            <motion.div whileTap={{ scale: 0.9 }}>
-              <Skip onClick={handleNext} />
-            </motion.div>
-          </div>
+          )}
+          {stage === 0 && (
+            <div css={BullseyeText}>
+              해당 단계를 완료하면 과녁을 눌러주세요!
+            </div>
+          )}
+          <div css={EndButton}>모험 포기</div>
         </div>
       )}
-
-      <AnimatePresence>
-        {isPaused && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            css={DimmedStyle}
-          >
-            <Ballon isAlert>
-              예상치 못한 상황이 있나요?
-              <br />
-              준비가 되면 다시 시작해주세요!
-            </Ballon>
-            <div css={Buttons}>
-              <motion.div whileTap={{ scale: 0.9 }}>
-                <Play onClick={() => setIsPaused(false)} />
-              </motion.div>
-              <div css={EmptyIcon} />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </SplashWrapper>
   )
 }

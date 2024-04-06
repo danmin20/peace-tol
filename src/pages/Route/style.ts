@@ -31,32 +31,18 @@ export const ContentStyle = css({
   }
 })
 
-export const Buttons = css({
-  display: 'flex',
-  gap: '72px',
+export const BullseyeText = css({
+  fontSize: '16px',
+  lineHeight: '26.56px',
   position: 'absolute',
-  bottom: '123px',
-  alignItems: 'center',
-  justifyContent: 'center'
+  color: color.red,
+  bottom: '82px'
 })
 
-export const EmptyIcon = css({
-  width: '57px'
-})
-
-export const DimmedStyle = css({
+export const EndButton = css({
+  fontSize: '14px',
+  lineHeight: '23.24px',
   position: 'absolute',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  alignItems: 'flex-end',
-  justifyContent: 'center',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  zIndex: 10,
-
-  '> div:first-of-type': {
-    marginBottom: '215px'
-  }
+  color: color.gray3,
+  bottom: '44px'
 })
