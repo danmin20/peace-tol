@@ -1,7 +1,14 @@
-type Props = {
-  content: string
-}
+import { AlertBallonStyle, BallonStyle } from './style'
 
-export const Ballon = ({ content }: Props) => {
-  return <div>{content}</div>
+type Props = {
+  children: React.ReactNode
+  isAlert?: boolean
+} & React.HTMLAttributes<HTMLDivElement>
+
+export const Ballon = ({ children, isAlert = false, ...props }: Props) => {
+  return (
+    <div css={isAlert ? AlertBallonStyle : BallonStyle} {...props}>
+      {children}
+    </div>
+  )
 }

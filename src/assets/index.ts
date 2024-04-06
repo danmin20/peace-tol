@@ -1,4 +1,7 @@
 export { default as Next } from './next.svg?react'
+export { default as Pause } from './pause.svg?react'
+export { default as Play } from './play.svg?react'
+export { default as Skip } from './skip.svg?react'
 
 export { default as Back } from './back.svg?react'
 

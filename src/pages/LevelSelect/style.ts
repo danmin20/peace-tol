@@ -16,15 +16,15 @@ export const TextGroup = css({
   gap: '5px',
 
   div: {
-    '&:nth-child(1)': {
-      'font-size': '24px',
+    '&:nth-of-type(1)': {
+      fontSize: '24px',
       fontWeight: 700,
       span: {
         color: color.red
       }
     },
-    '&:nth-child(2)': {
-      'font-size': '16px',
+    '&:nth-of-type(2)': {
+      fontSize: '16px',
       fontWeight: 600,
       color: color.gray2
     }
