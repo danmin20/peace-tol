@@ -4,6 +4,7 @@ import { Layout } from './_common/components/Layout'
 import { LevelCheck } from './pages/LevelSelect'
 import { Main } from './pages/Main'
 import { OnBoarding } from './pages/OnBoarding'
+import { Review } from './pages/Review'
 import { Survey } from './pages/Survey'
 
 export const App = () => {
@@ -14,6 +15,7 @@ export const App = () => {
         <Route path="main" element={<Main />} />
         <Route path="level-check" element={<LevelCheck />} />
         <Route path="survey" element={<Survey />} />
+        <Route path="review" element={<Review />} />
       </Route>
     </Routes>
   )

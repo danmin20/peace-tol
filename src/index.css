@@ -1,5 +1,10 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 
+@font-face {
+  font-family: 'GeekbleMalang2';
+  src: url('./assets/fonts/GeekbleMalang2WOFF.woff') format('woff');
+}
+
 :root {
   font-family:
     'Pretendard Variable',
@@ -20,6 +25,8 @@
 }
 
 * {
+  margin: 0;
+  padding: 0;
   outline: none;
   border: none;
 }
