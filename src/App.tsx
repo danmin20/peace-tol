@@ -8,6 +8,7 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<OnBoarding />} />
+        <Route path="/main" element={<div>메인 페이지</div>} />
       </Route>
     </Routes>
   )
