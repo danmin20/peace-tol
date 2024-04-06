@@ -4,19 +4,26 @@ export const wrapperCss = css`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   height: 100%;
+  padding: 0 24px;
+`
+
+export const iconCss = css`
+  width: 75px;
+  height: 75px;
+  background-color: grey;
+  margin-top: 100px;
+  margin-bottom: 50px;
 `
 
 export const titleCss = css`
-  position: absolute;
-  top: calc(50% - 110px);
-  left: 50%;
-  transform: translateX(-50%);
   font-size: 27px;
   font-weight: 700;
   line-height: 32px;
   text-align: center;
+  white-space: nowrap;
+  margin-bottom: 86px;
 `
 
 export const nextIconCss = css`

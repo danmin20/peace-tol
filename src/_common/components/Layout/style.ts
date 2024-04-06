@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 
 export const wrapperCss = css({
-  width: '100%',
-  height: '100%',
+  width: '100vw',
+  height: '100vh',
   backgroundColor: '#eee'
 })
 

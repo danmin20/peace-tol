@@ -5,7 +5,7 @@ import { color } from '../../../../_common/styles/color'
 export const wrapperCss = css`
   position: relative;
   display: flex;
-  padding: 0 30px;
+  width: 100%;
 `
 
 export const lineCss = css`
@@ -13,7 +13,7 @@ export const lineCss = css`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: calc(80% - 60px);
+  width: calc(100% - 60px);
   height: 1px;
   background-color: ${color.red3};
 `
