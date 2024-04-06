@@ -115,7 +115,7 @@ export const Route = () => {
             exit={{ y: -30, opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <img src={dummy[stage - 1].imagePath} />
+            <img src={dummy[stage].imagePath} width="100%" />
           </motion.div>
 
           <div css={ContentStyle}>
