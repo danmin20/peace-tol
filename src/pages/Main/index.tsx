@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 import { RecordListRow } from './components/RecordListRow'
@@ -48,7 +49,16 @@ export const Main = () => {
           )}
           {!data && <div css={emptyRecordCss}>아직 기록이 없어요</div>}
         </div>
-        <div css={buttonWrapperCss}>
+        <motion.div
+          css={buttonWrapperCss}
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.05 }}
+          transition={{
+            repeat: Infinity,
+            repeatType: 'reverse',
+            duration: 0.5
+          }}
+        >
           <Button
             onAnimationCompleteClick={() => navigate('/level-select')}
             style={{ height: '80px' }}
@@ -56,7 +66,7 @@ export const Main = () => {
           >
             나만의 모험 떠나기
           </Button>
-        </div>
+        </motion.div>
       </div>
     </SplashWrapper>
   )
