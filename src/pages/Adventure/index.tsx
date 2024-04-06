@@ -6,6 +6,8 @@ import { AdventureSplash } from './components/AdventureSplash'
 import { Progress } from './components/Progress'
 import { Question } from './components/Question'
 import { BullseyeText, ContentStyle, EndButton, LayoutStyle } from './style'
+import { AnswerType } from './types/adventure.type'
+import { getContentHtml } from './utils/parse-html'
 import {
   useGetAdventure,
   usePostNextStepMutation
@@ -15,8 +17,6 @@ import { Header } from '../../_common/components/Header'
 import { SplashWrapper } from '../../_common/components/SplashWrapper'
 import { getUser } from '../../_common/utils/user'
 import { Bullseye, LogoFilled } from '../../assets'
-
-const parser = new DOMParser()
 
 export const Adventure = () => {
   const navigate = useNavigate()
@@ -70,7 +70,7 @@ export const Adventure = () => {
     }
   }
 
-  const handleQuestion = async () => {
+  const handleQuestion = async (answerType: AnswerType) => {
     const userUuid = getUser()
     if (!userUuid) return
 
@@ -79,7 +79,7 @@ export const Adventure = () => {
         id: adventureId,
         body: {
           userUuid,
-          answerType: ''
+          answerType
         }
       })
       await refetch()
@@ -92,29 +92,18 @@ export const Adventure = () => {
     setIsQuestionTime(false)
   }
 
-  const contentHtml = parser.parseFromString(
-    adventure?.missions[stage]?.body ?? '',
-    'text/html'
-  ).body.innerHTML
+  const contentHtml = getContentHtml(adventure?.missions[stage]?.body ?? '')
 
   return (
     <SplashWrapper splash={<AdventureSplash />} loading={isLoading}>
       <Header
         handleBack={handleBack}
-        extra={
-          <Progress stage={stage} total={adventure?.missions.length ?? 0} />
-        }
+        extra={<Progress stage={stage} total={totalStage + 1} />}
       />
       {isQuestionTime && (stage === 3 || stage === 6) ? (
         <Question onConfirm={handleQuestion} />
       ) : (
         <div css={LayoutStyle}>
-          <Header
-            handleBack={handleBack}
-            extra={
-              <Progress stage={stage} total={adventure?.missions.length ?? 0} />
-            }
-          />
           <motion.div
             key={stage}
             initial={{ y: 30, opacity: 0 }}
@@ -164,7 +153,7 @@ export const Adventure = () => {
               bottom: '136px'
             }}
           >
-            <Bullseye onClick={() => setIsShoot(true)} />
+            <Bullseye onClick={handleNext} />
           </motion.div>
           {isShoot && (
             <motion.div

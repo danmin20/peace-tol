@@ -10,7 +10,8 @@ import { AxiosError } from 'axios'
 import {
   AddNextStepForAdventureDto,
   AdventureResponseDto,
-  CreateAdventureDto
+  CreateAdventureDto,
+  CreateReviewDto
 } from '../../__generated__/swagger'
 import swaggerApi from '../utils/swagger-api'
 
@@ -74,12 +75,20 @@ export const usePostFinalStepMutation = () => {
   return useMutation(postFinalStep)
 }
 
-const postFinishStep = async (id: number) => {
+type CreateReviewBody = {
+  id: string
+  body: CreateReviewDto
+}
+
+const postFinishAdventure = async ({ id, body }: CreateReviewBody) => {
   const data =
-    await swaggerApi.adventureController.adventureControllerFinishAdventure(id)
+    await swaggerApi.adventureController.adventureControllerFinishAdventure(
+      id,
+      body
+    )
   return data.data
 }
 
-export const usePostFinishStepMutation = () => {
-  return useMutation(postFinishStep)
+export const usePostFinishAdventureMutation = () => {
+  return useMutation(postFinishAdventure)
 }
