@@ -107,7 +107,14 @@ export const LevelSelect = () => {
 
         {selectedLevel ? (
           <div css={stageInfo}>
-            <div>{levelMap[selectedLevel].stage}단계로 이루어져 있어요.</div>
+            <div
+              style={{
+                position: 'absolute',
+                top: '-15px'
+              }}
+            >
+              {levelMap[selectedLevel].stage}단계로 이루어져 있어요.
+            </div>
             <AnimatePresence mode="wait">
               <motion.div
                 key={selectedLevel}
@@ -121,7 +128,7 @@ export const LevelSelect = () => {
             </AnimatePresence>
           </div>
         ) : (
-          <div css={stageInfo} style={{ marginTop: '88px' }}>
+          <div css={stageInfo}>
             <GunLine />
           </div>
         )}
