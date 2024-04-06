@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import { color } from '../../_common/styles/color'
 
 export const LayoutStyle = css({
-  paddingTop: '41px',
+  paddingTop: '15px',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -16,15 +16,14 @@ export const ContentStyle = css({
   padding: '0px 25px',
   display: 'flex',
   flexDirection: 'column',
-  gap: '33px',
+  gap: '25px',
   alignItems: 'center',
 
   '> div:nth-of-type(1)': {
-    fontSize: '28px',
+    fontSize: '23px',
     fontWeight: 700,
-    lineHeight: '44px',
+    lineHeight: '30px',
     textAlign: 'center',
-    marginTop: '40px',
     span: {
       color: color.red
     }

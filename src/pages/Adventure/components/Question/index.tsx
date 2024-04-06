@@ -58,7 +58,7 @@ const middleStage: Record<'Hungry' | 'Thirsty', MissionDto> = {
     quote: '평소에 안 가던 곳이라도 말이죠.'
   },
   Thirsty: {
-    imagePath: '/restaurant.png',
+    imagePath: '/cafe.png',
     body: `<span>${randomNumber}번째</span>로 보이는 카페에 들어가보세요.`,
     quote: '쉬다 가세요!'
   }

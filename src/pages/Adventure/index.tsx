@@ -167,7 +167,7 @@ export const Adventure = () => {
                   ease: cubicBezier(0.34, 1.56, 0.64, 1)
                 }}
                 onAnimationComplete={handleNext}
-                style={{ position: 'absolute', bottom: '118px' }}
+                style={{ position: 'absolute', bottom: '102px' }}
               >
                 <LogoFilled />
               </motion.div>
@@ -175,7 +175,7 @@ export const Adventure = () => {
               <motion.div
                 key="bullseye"
                 whileTap={{ scale: 0.9 }}
-                style={{ position: 'absolute', bottom: '136px' }}
+                style={{ position: 'absolute', bottom: '120px' }}
                 onClick={() => setIsShoot(true)}
               >
                 <Bullseye />
