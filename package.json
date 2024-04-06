@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "type-check": "tsc -p tsconfig.json",
-    "generate-api": "swagger-typescript-api -p https:// -o src/__generated__ -n swagger.ts --axios --module-name-first-tag"
+    "generate-api": "swagger-typescript-api -p http://43.201.108.75:8000/swagger/docs-json -o src/__generated__ -n swagger.ts --axios --module-name-first-tag"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

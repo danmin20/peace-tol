@@ -13,6 +13,7 @@ export const wrapperCss = css`
   align-items: center;
   justify-content: center;
   background-color: ${color.red};
+  z-index: 2;
 `
 
 export const peaceTolTextCss = css`

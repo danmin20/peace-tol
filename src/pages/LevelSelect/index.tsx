@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import {
@@ -13,7 +13,10 @@ import {
 } from './style'
 import { Button } from '../../_common/components/Button'
 import { Header } from '../../_common/components/Header'
+import { Splash } from '../../_common/components/Splash'
 import { Check, Gun1, Gun2, Gun3 } from '../../assets'
+import { getUser } from '../../_common/utils/user'
+import { postUser } from '../../_common/api/user.api'
 
 type LevelType = {
   level: number
@@ -45,8 +48,20 @@ export const LevelSelect = () => {
     location.state?.level ?? undefined
   )
 
+  const handleSetUser = async () => {
+    if (!getUser()) {
+      const data = await postUser()
+      localStorage.setItem('user', JSON.stringify(data))
+    }
+  }
+
+  useEffect(() => {
+    handleSetUser()
+  }, [])
+
   return (
     <>
+      <Splash />
       <Header handleBack={() => navigate('/main')} />
       <div css={LayoutStyle}>
         <div css={TextGroup}>
