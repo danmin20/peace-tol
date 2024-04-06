@@ -12,6 +12,7 @@ export const ButtonStyle = css({
   height: '43px',
   fontWeight: 600,
   fontSize: '16px',
+  flexShrink: 0,
   cursor: 'pointer'
 })
 

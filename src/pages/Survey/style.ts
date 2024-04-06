@@ -6,14 +6,15 @@ export const wrapperCss = css`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  padding: 0 24px;
+  padding: 0 24px 62px;
 `
 
 export const iconCss = css`
   width: 75px;
   height: 75px;
-  margin-top: 100px;
+  margin-top: 124px;
   margin-bottom: 50px;
+  flex-shrink: 0;
 `
 
 export const titleCss = css`
@@ -25,11 +26,6 @@ export const titleCss = css`
   margin-bottom: 86px;
 `
 
-export const nextIconCss = css`
-  position: absolute;
-  right: 38px;
-  bottom: 57px;
-  width: 53px;
-  height: 53px;
-  cursor: pointer;
+export const spacingCss = css`
+  height: 100%;
 `
