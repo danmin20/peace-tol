@@ -10,8 +10,10 @@ import { AxiosError } from 'axios'
 import {
   AddNextStepForAdventureDto,
   AdventureResponseDto,
+  AdventureCountCreationResponseDto,
   CreateAdventureDto,
-  CreateReviewDto
+  CreateReviewDto,
+  RecentAdventureResponseDto
 } from '../../__generated__/swagger'
 import swaggerApi from '../utils/swagger-api'
 
@@ -94,4 +96,54 @@ const postFinishAdventure = async ({ id, body }: CreateReviewBody) => {
 
 export const usePostFinishAdventureMutation = () => {
   return useMutation(postFinishAdventure)
+}
+
+const getUserAdventureCount = async (uuid: string) => {
+  const response =
+    await swaggerApi.adventureController.adventureControllerGetAdventureCount(
+      uuid
+    )
+  return response.data
+}
+
+export const useGetUserAdventureCount = <
+  TData = AdventureCountCreationResponseDto
+>(
+  uuid: string,
+  options?: UseQueryOptions<
+    Promise<AdventureCountCreationResponseDto>,
+    AxiosError,
+    TData,
+    [QueryKey, string]
+  >
+): UseQueryResult<TData, AxiosError> => {
+  return useQuery(
+    [['getUserAdventureCount'], uuid],
+    async () => await getUserAdventureCount(uuid),
+    options
+  )
+}
+
+const getUserAdventureList = async (uuid: string) => {
+  const response =
+    await swaggerApi.adventureController.adventureControllerGetRecentAdventure(
+      uuid
+    )
+  return response.data
+}
+
+export const useGetUserAdventureList = <TData = RecentAdventureResponseDto[]>(
+  uuid: string,
+  options?: UseQueryOptions<
+    Promise<RecentAdventureResponseDto>,
+    AxiosError,
+    TData,
+    [QueryKey, string]
+  >
+): UseQueryResult<TData, AxiosError> => {
+  return useQuery(
+    [['getUserAdventureList'], uuid],
+    async () => await getUserAdventureList(uuid),
+    options
+  )
 }
