@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { motion, AnimatePresence, useAnimate } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Progress } from './components/Progress'
@@ -32,6 +33,7 @@ const dummy = [
 export const Route = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const [scope, animate] = useAnimate()
 
   const [stage, setStage] = useState<number>(1)
   const [isPaused, setIsPaused] = useState<boolean>(false)
@@ -59,6 +61,14 @@ export const Route = () => {
 
   const isQuestionTime = stage === 5 || stage === 8 || stage === 10
 
+  useEffect(() => {
+    animate(
+      scope.current,
+      { opacity: isPaused ? 0 : 1 },
+      { duration: 0.3, ease: 'easeOut' }
+    )
+  }, [isPaused])
+
   return (
     <>
       {isQuestionTime ? (
@@ -81,29 +91,35 @@ export const Route = () => {
           </div>
 
           <div css={Buttons}>
-            {isPaused ? (
-              <div css={EmptyIcon} />
-            ) : (
+            <span ref={scope}>
               <Pause onClick={() => setIsPaused(true)} />
-            )}
+            </span>
             <Skip onClick={handleNext} />
           </div>
         </div>
       )}
 
-      {isPaused && (
-        <div css={DimmedStyle}>
-          <Ballon isAlert>
-            예상치 못한 상황이 있나요?
-            <br />
-            준비가 되면 다시 시작해주세요!
-          </Ballon>
-          <div css={Buttons}>
-            <Play onClick={() => setIsPaused(false)} />
-            <div css={EmptyIcon} />
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isPaused && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            css={DimmedStyle}
+          >
+            <Ballon isAlert>
+              예상치 못한 상황이 있나요?
+              <br />
+              준비가 되면 다시 시작해주세요!
+            </Ballon>
+            <div css={Buttons}>
+              <Play onClick={() => setIsPaused(false)} />
+              <div css={EmptyIcon} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

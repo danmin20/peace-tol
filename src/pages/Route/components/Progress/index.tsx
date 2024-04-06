@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 import { Background, Bar } from './style'
 
 type Props = {
@@ -8,11 +10,10 @@ type Props = {
 export const Progress = ({ total, stage }: Props) => {
   return (
     <div css={Background}>
-      <div
+      <motion.div
+        initial={{ width: 0 }}
+        animate={{ width: `${(stage / total) * 100}%` }}
         css={Bar}
-        style={{
-          width: `${(stage / total) * 100}%`
-        }}
       />
     </div>
   )
