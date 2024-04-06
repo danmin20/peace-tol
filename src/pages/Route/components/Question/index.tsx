@@ -1,3 +1,6 @@
+import { ButtonStyle, Buttons, QStyle, QuestionStyle, Wrapper } from './style'
+import { Header } from '../../../../_common/components/Header'
+
 const questions: Record<
   number,
   { question: string; answers?: { value: string; content: string }[] }
@@ -43,15 +46,25 @@ const questions: Record<
 
 type Props = {
   stage: number
+  setIsQuestionTime: (value: boolean) => void
 }
 
-export const Question = ({ stage }: Props) => {
-  const content = questions[stage]
+export const Question = ({ stage, setIsQuestionTime }: Props) => {
+  // const content = questions[stage]
+  const content = questions[5]
 
   return (
-    <div>
-      <div>Q</div>
-      <div>{content.question}</div>
+    <div css={Wrapper}>
+      <Header handleBack={() => setIsQuestionTime(false)} />
+      <div css={QStyle}>Q</div>
+      <div css={QuestionStyle}>{content.question}</div>
+      <div css={Buttons}>
+        {content.answers?.map((answer) => (
+          <button key={answer.value} css={ButtonStyle}>
+            {answer.content}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }

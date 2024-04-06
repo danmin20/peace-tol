@@ -37,6 +37,7 @@ export const Route = () => {
 
   const [stage, setStage] = useState<number>(1)
   const [isPaused, setIsPaused] = useState<boolean>(false)
+  const [isQuestionTime, setIsQuestionTime] = useState<boolean>(false)
 
   const handleBack = () => {
     if (stage === 1) {
@@ -53,13 +54,18 @@ export const Route = () => {
       navigate('/survey')
       return
     }
+    // const isQuestionTime = stage === 5 || stage === 8 || stage === 10
+    const isQuestionTime = true
+    if (isQuestionTime) {
+      setIsQuestionTime(true)
+      return
+    }
+
     setStage(stage + 1)
   }
 
   const contentHtml = parser.parseFromString(dummy[stage].content, 'text/html')
     .body.innerHTML
-
-  const isQuestionTime = stage === 5 || stage === 8 || stage === 10
 
   useEffect(() => {
     animate(
@@ -72,7 +78,7 @@ export const Route = () => {
   return (
     <>
       {isQuestionTime ? (
-        <Question stage={stage} />
+        <Question stage={stage} setIsQuestionTime={setIsQuestionTime} />
       ) : (
         <div css={LayoutStyle}>
           <Header
