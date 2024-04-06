@@ -28,16 +28,12 @@ export const RecordListRow = ({ startDate, endDate, level, rating }: Props) => {
       <GunIcon width={44} height={44} />
       <div css={textWrapperCss}>
         <p css={formatDateCss}>{format(new Date(endDate), 'M월 d일')}</p>
-        <p css={durationCss}>{format(duration, 'hh시간 mm분')}</p>
+        <p css={durationCss}>{format(duration, 'h시간 m분')}</p>
       </div>
       <div style={{ flex: 1 }} />
       <div css={ratingWrapperCss}>
         {Array.from({ length: 5 }).map((_, index) =>
-          rating > index ? (
-            <StarFilled key={index} width={16} height={16} />
-          ) : (
-            <Star key={index} width={16} height={16} />
-          )
+          rating > index ? <StarFilled key={index} /> : <Star key={index} />
         )}
       </div>
     </div>

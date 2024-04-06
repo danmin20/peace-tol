@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import {
   levelTextCss,
   levelWrapperCss,
+  lineGradientCss,
   targetBoxCss,
   targetIconCss
 } from './style'
@@ -28,6 +29,7 @@ export const TargetBox = ({ targetCount = 0 }: Props) => {
         <p css={levelTextCss} style={{ color: color.red }}>
           LV. {level}
         </p>
+        <div css={lineGradientCss} />
         <p css={levelTextCss} style={{ color: color.gray4 }}>
           LV. {level + 1}
         </p>

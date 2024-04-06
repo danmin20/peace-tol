@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 
-import { RecordListRow } from './components/RecordListRow.'
+import { RecordListRow } from './components/RecordListRow'
 import {
   buttonWrapperCss,
+  // emptyRecordCss,
   logoCss,
   recordHeaderCss,
   recordScrollBoxCss,
+  targetBoxCss,
   wrapperCss
 } from './style'
 import { Button } from '../../_common/components/Button'
@@ -60,7 +62,9 @@ export const Main = () => {
     <SplashWrapper splash={<Splash />}>
       <div css={wrapperCss}>
         <Logo css={logoCss} />
-        <TargetBox />
+        <div css={targetBoxCss}>
+          <TargetBox />
+        </div>
 
         <div css={recordHeaderCss}>
           <p>나의 모험 기록</p>
@@ -69,6 +73,8 @@ export const Main = () => {
           {dummy.map((record, index) => (
             <RecordListRow key={index} {...record} />
           ))}
+          {/* TODO: API 연결하면 주석 제거 */}
+          {/* {<div css={emptyRecordCss}>아직 기록이 없어요</div>} */}
         </div>
         <div css={buttonWrapperCss}>
           <Button

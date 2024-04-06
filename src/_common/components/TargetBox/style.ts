@@ -5,6 +5,7 @@ import { color } from '../../styles/color'
 export const levelWrapperCss = css`
   display: flex;
   justify-content: space-between;
+  gap: 18px;
   align-items: center;
   width: 100%;
   margin-bottom: 12px;
@@ -16,6 +17,14 @@ export const levelTextCss = css`
   font-size: 24px;
   font-weight: 400;
   line-height: 27.6px;
+  white-space: nowrap;
+`
+
+export const lineGradientCss = css`
+  width: 100%;
+  height: 1px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #ff5a5a 0%, #dbdbdb 100%);
 `
 
 export const targetBoxCss = css`
