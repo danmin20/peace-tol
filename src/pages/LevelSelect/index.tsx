@@ -61,7 +61,10 @@ export const LevelSelect = () => {
   }, [])
 
   return (
-    <SplashWrapper splash={<Splash />}>
+    <SplashWrapper
+      active={location.state?.level === undefined}
+      splash={<Splash />}
+    >
       {/* <Header handleBack={() => navigate('/')} /> */}
       <div css={LayoutStyle}>
         <div css={TextGroup}>

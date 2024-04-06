@@ -2,12 +2,18 @@ import { motion, AnimatePresence, AnimatePresenceProps } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 type Props = {
+  active?: boolean
   splash: React.ReactNode
   children: React.ReactNode
 } & AnimatePresenceProps
 
-export const SplashWrapper = ({ splash, children, ...props }: Props) => {
-  const [show, setShow] = useState(true)
+export const SplashWrapper = ({
+  active = true,
+  splash,
+  children,
+  ...props
+}: Props) => {
+  const [show, setShow] = useState(active)
 
   useEffect(() => {
     const timerId = setTimeout(() => {
