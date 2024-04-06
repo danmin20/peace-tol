@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 
 export const wrapperCss = css({
   width: '100vw',
-  height: '100vh',
+  height: '100dvh',
   backgroundColor: '#eee'
 })
 
