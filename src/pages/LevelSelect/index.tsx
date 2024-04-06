@@ -121,7 +121,7 @@ export const LevelSelect = () => {
             </AnimatePresence>
           </div>
         ) : (
-          <div css={stageInfo} style={{ marginTop: '100px' }}>
+          <div css={stageInfo} style={{ marginTop: '88px' }}>
             <GunLine />
           </div>
         )}

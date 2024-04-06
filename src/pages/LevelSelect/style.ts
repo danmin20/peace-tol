@@ -60,10 +60,14 @@ export const checkIcon = css`
 export const stageInfo = css`
   display: flex;
   flex-direction: column;
-  gap: 37px;
+  gap: 15px;
   align-items: center;
   font-size: 16px;
   font-weight: 600;
   color: ${color.red};
   margin-top: 31px;
+
+  svg {
+    width: 200px;
+  }
 `
