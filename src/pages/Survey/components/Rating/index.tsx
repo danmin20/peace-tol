@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 import {
   containerCss,
   labelCss,
@@ -7,6 +9,7 @@ import {
   ratingTextContainerCss,
   wrapperCss
 } from './style'
+import { color } from '../../../../_common/styles/color'
 
 type Props = {
   selected: number
@@ -42,16 +45,36 @@ export const Rating = ({ selected, onSelected }: Props) => {
       <div css={lineCss} />
       {ratingList.map((item) => (
         <div key={item.value} css={containerCss}>
-          <input
+          <motion.input
             type="radio"
+            initial={{
+              backgroundColor: selected === item.value ? color.red : color.red3
+            }}
+            animate={{
+              backgroundColor: selected === item.value ? color.red : color.red3
+            }}
             css={radioCss}
             checked={selected === item.value}
             onChange={() => onSelected(item.value)}
           />
           {selected === item.value && (
             <div key={item.value} css={ratingTextContainerCss}>
-              <p css={numberCss}>{item.value}</p>
-              <label css={labelCss}>{item.label}</label>
+              <motion.p
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2, delay: 0 }}
+                css={numberCss}
+              >
+                {item.value}
+              </motion.p>
+              <motion.label
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+                css={labelCss}
+              >
+                {item.label}
+              </motion.label>
             </div>
           )}
         </div>
