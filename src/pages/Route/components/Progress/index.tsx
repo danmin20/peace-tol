@@ -11,7 +11,7 @@ export const Progress = ({ total, stage }: Props) => {
       <div
         css={Bar}
         style={{
-          width: `${((stage + 1) / total) * 100}%`
+          width: `${(stage / total) * 100}%`
         }}
       />
     </div>
