@@ -4,14 +4,13 @@ import { color } from '../../../../_common/styles/color'
 
 export const Wrapper = css({
   width: '100%',
-  height: '100%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   lineHeight: '20px',
   padding: '0px 49px',
-  marginTop: '-50px'
+  marginTop: '159px'
 })
 
 export const QStyle = css({
