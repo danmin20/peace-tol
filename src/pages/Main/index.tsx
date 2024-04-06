@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { RecordListRow } from './components/RecordListRow.'
 import {
+  buttonWrapperCss,
   logoCss,
   recordHeaderCss,
   recordScrollBoxCss,
@@ -59,9 +60,8 @@ export const Main = () => {
     <SplashWrapper splash={<Splash />}>
       <div css={wrapperCss}>
         <Logo css={logoCss} />
-        <div style={{ padding: '0 30px' }}>
-          <TargetBox />
-        </div>
+        <TargetBox />
+
         <div css={recordHeaderCss}>
           <p>나의 모험 기록</p>
         </div>
@@ -70,13 +70,15 @@ export const Main = () => {
             <RecordListRow key={index} {...record} />
           ))}
         </div>
-        <Button
-          onClick={() => navigate('/level-select')}
-          style={{ height: '80px' }}
-          isFullWidth
-        >
-          나만의 모험 떠나기
-        </Button>
+        <div css={buttonWrapperCss}>
+          <Button
+            onAnimationCompleteClick={() => navigate('/level-select')}
+            style={{ height: '80px' }}
+            isFullWidth
+          >
+            나만의 모험 떠나기
+          </Button>
+        </div>
       </div>
     </SplashWrapper>
   )
