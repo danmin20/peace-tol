@@ -23,9 +23,11 @@ export const Finish = () => {
   const handleCopyClipBoard = async () => {
     if (!adventureId) return
 
-    await navigator.clipboard.writeText(
-      `https://peace-tol.netlify.app/adventure/${adventureId}`
-    )
+    const text = `나 모험 다녀왔는데, 너도 한 번 해볼래?
+    \n평화로운 일상에 심심함을 느끼진 않으셨나요?\n피스톨에서 함께 특별한 경험을 해보세요!
+    \nhttps://peace-tol.netlify.app/adventure/${adventureId}`
+
+    await navigator.clipboard.writeText(text)
     setIsCopied(true)
   }
 
