@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -82,7 +82,17 @@ export const LevelSelect = () => {
         {selectedLevel && (
           <div css={StageInfo}>
             <div>{levelMap[selectedLevel].stage}단계로 이루어져 있어요.</div>
-            {levelMap[selectedLevel].img}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedLevel}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {levelMap[selectedLevel].img}
+              </motion.div>
+            </AnimatePresence>
           </div>
         )}
 
