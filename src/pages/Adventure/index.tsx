@@ -2,9 +2,9 @@ import { motion, cubicBezier } from 'framer-motion'
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+import { AdventureSplash } from './components/AdventureSplash'
 import { Progress } from './components/Progress'
 import { Question } from './components/Question'
-import { RouteSplash } from './components/RouteSplash'
 import { BullseyeText, ContentStyle, EndButton, LayoutStyle } from './style'
 import { useGetAdventure } from '../../_common/api/adventure.api'
 import { Ballon } from '../../_common/components/Ballon'
@@ -14,7 +14,7 @@ import { Bullseye, LogoFilled } from '../../assets'
 
 const parser = new DOMParser()
 
-export const Route = () => {
+export const Adventure = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -22,7 +22,7 @@ export const Route = () => {
   const [isQuestionTime, setIsQuestionTime] = useState<boolean>(false)
   const [isShoot, setIsShoot] = useState<boolean>(false)
 
-  const adventureId = location.pathname.split('/route/')[1]
+  const adventureId = location.pathname.split('/adventure/')[1]
 
   const {
     data: adventure,
@@ -80,7 +80,7 @@ export const Route = () => {
   ).body.innerHTML
 
   return (
-    <SplashWrapper splash={<RouteSplash />} loading={isLoading}>
+    <SplashWrapper splash={<AdventureSplash />} loading={isLoading}>
       <Header
         handleBack={handleBack}
         extra={

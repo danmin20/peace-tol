@@ -1,7 +1,7 @@
 import { logoCss, titleCss, wrapperCss } from './style'
 import { Logo } from '../../../../assets'
 
-export const RouteSplash = () => {
+export const AdventureSplash = () => {
   return (
     <div css={wrapperCss}>
       <h1 css={titleCss}>
