@@ -1,11 +1,13 @@
 import { motion, HTMLMotionProps } from 'framer-motion'
-import { useRef } from 'react'
+import Lottie from 'lottie-react'
 
-import { ButtonStyle, FullWidthButtonStyle } from './style'
+import { ButtonStyle, FullWidthButtonStyle, loadingLottieStyle } from './style'
+import loadingJson from '../../../assets/loading.json'
 import { color } from '../../styles/color'
 
 type Props = {
   isFullWidth?: boolean
+  isLoading?: boolean
   disabled?: boolean
   colorType?: 'primary' | 'secondary' | 'tertiary'
   children: React.ReactNode
@@ -14,6 +16,7 @@ type Props = {
 
 export const Button = ({
   isFullWidth = false,
+  isLoading = false,
   disabled = false,
   colorType = 'primary',
   onAnimationCompleteClick,
@@ -40,7 +43,15 @@ export const Button = ({
       disabled={disabled}
       {...props}
     >
-      {children}
+      {isLoading ? (
+        <Lottie
+          animationData={loadingJson}
+          loop={true}
+          css={loadingLottieStyle}
+        />
+      ) : (
+        children
+      )}
     </motion.button>
   )
 }
