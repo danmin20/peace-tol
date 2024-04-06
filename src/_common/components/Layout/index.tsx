@@ -1,13 +1,13 @@
+import { Outlet } from 'react-router-dom'
+
 import { innerCss, wrapperCss } from './style'
 
-type Props = {
-  children: React.ReactNode
-}
-
-export const Layout = ({ children }: Props) => {
+export const Layout = () => {
   return (
     <div css={wrapperCss}>
-      <div css={innerCss}>{children}</div>
+      <div css={innerCss}>
+        <Outlet />
+      </div>
     </div>
   )
 }

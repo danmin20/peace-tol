@@ -1,5 +1,14 @@
+import { Route, Routes } from 'react-router-dom'
+
 import { Layout } from './_common/components/Layout'
+import { OnBoarding } from './pages/OnBoarding'
 
 export const App = () => {
-  return <Layout>App</Layout>
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<OnBoarding />} />
+      </Route>
+    </Routes>
+  )
 }
