@@ -39,7 +39,7 @@ export const Finish = () => {
         <br />
         특별한 시간이었길 바라요.
       </h1>
-      <TargetBox targetCount={data?.count} />
+      {data && <TargetBox targetCount={data.count} />}
       <div
         css={clipboard}
         onClick={handleCopyClipBoard}
@@ -53,14 +53,7 @@ export const Finish = () => {
         </div>
       </div>
 
-      <Button
-        onClick={() =>
-          navigate('/', {
-            state: { isSplash: false }
-          })
-        }
-        isFullWidth
-      >
+      <Button onClick={() => navigate('/')} isFullWidth>
         메인으로 가기
       </Button>
     </div>
