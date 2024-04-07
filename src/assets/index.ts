@@ -14,6 +14,7 @@ export { default as LogoWhite } from './logo_white.svg?react'
 export { default as LogoBlack } from './logo_black.svg?react'
 export { default as LogoFilled } from './logo_filled.svg?react'
 export { default as LogoEmpty } from './logo_empty.svg?react'
+export { default as LogoGrey } from './logo_grey.svg?react'
 
 export { default as Star } from './star.svg?react'
 export { default as StarFilled } from './star_filled.svg?react'

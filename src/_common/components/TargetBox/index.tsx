@@ -7,7 +7,7 @@ import {
   targetBoxCss,
   targetIconCss
 } from './style'
-import { Logo, LogoEmpty } from '../../../assets'
+import { Logo, LogoGrey } from '../../../assets'
 import { color } from '../../styles/color'
 
 type Props = {
@@ -40,7 +40,7 @@ export const TargetBox = ({ targetCount = 0 }: Props) => {
             {i < restTargetCount ? (
               <Logo css={targetIconCss} />
             ) : (
-              <LogoEmpty css={targetIconCss} />
+              <LogoGrey css={targetIconCss} />
             )}
           </Fragment>
         ))}
