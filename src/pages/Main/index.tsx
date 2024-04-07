@@ -52,7 +52,9 @@ export const Main = () => {
               />
             )
           )}
-          {!data && <div css={emptyRecordCss}>아직 기록이 없어요</div>}
+          {(!data || data.length === 0) && (
+            <div css={emptyRecordCss}>아직 기록이 없어요</div>
+          )}
         </div>
         <motion.div
           css={buttonWrapperCss}
