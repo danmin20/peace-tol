@@ -36,5 +36,5 @@ export const BullseyeText = css({
   lineHeight: '26.56px',
   position: 'absolute',
   color: color.red,
-  bottom: '82px'
+  bottom: '60px'
 })
