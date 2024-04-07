@@ -40,20 +40,6 @@ export const Adventure = () => {
 
   const totalStage = level === 1 ? 4 : level === 2 ? 7 : 9
 
-  const handleBack = () => {
-    if (stage === 0) {
-      navigate('/', {
-        state: { level: level ?? undefined }
-      })
-      return
-    }
-    if (isQuestionTime) {
-      setIsQuestionTime(false)
-      return
-    }
-    setStage(stage - 1)
-  }
-
   const handleNext = () => {
     setIsShoot(false)
     const isQuestionStage = !adventure?.endedAt && (stage === 3 || stage === 6)
@@ -111,7 +97,7 @@ export const Adventure = () => {
   return (
     <SplashWrapper splash={<AdventureSplash />}>
       <Header
-        handleBack={handleBack}
+        // handleBack={handleBack}
         extra={<Progress stage={stage} total={totalStage + 1} />}
       />
       {isQuestionTime && (stage === 3 || stage === 6) ? (

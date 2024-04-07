@@ -5,16 +5,20 @@ import { Back } from '../../../assets'
 
 type Props = {
   extra?: React.ReactNode
-  handleBack: () => void
+  handleBack?: () => void
 }
 
 export const Header = ({ extra, handleBack }: Props) => {
   return (
     <>
       <div css={HeaderStyle}>
-        <motion.div whileTap={{ scale: 0.9 }}>
-          <Back onClick={handleBack} />
-        </motion.div>
+        {handleBack ? (
+          <motion.div whileTap={{ scale: 0.9 }}>
+            <Back onClick={handleBack} />
+          </motion.div>
+        ) : (
+          <div />
+        )}
         {extra}
       </div>
       <div css={spacingCss} />
