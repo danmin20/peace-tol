@@ -34,7 +34,7 @@ export const Main = () => {
       <div css={wrapperCss}>
         <Logo css={logoCss} />
         <div css={targetBoxCss}>
-          <TargetBox targetCount={data?.length} />
+          {data && <TargetBox targetCount={data?.length} />}
         </div>
 
         <div css={recordHeaderCss}>
