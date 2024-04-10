@@ -1,27 +1,16 @@
-import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import { innerCss, wrapperCss } from './style'
+import { Splash } from '../Splash'
+import { SplashWrapper } from '../SplashWrapper'
 
 export const Layout = () => {
-  useEffect(() => {
-    localStorage.setItem('isFirstVisit', 'true')
-
-    const handleBeforeUnload = () => {
-      localStorage.removeItem('isFirstVisit')
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload)
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-    }
-  }, [])
-
   return (
     <div css={wrapperCss}>
       <div css={innerCss}>
-        <Outlet />
+        <SplashWrapper timeout={4000} splash={<Splash />}>
+          <Outlet />
+        </SplashWrapper>
       </div>
     </div>
   )
